@@ -2,6 +2,7 @@
 .topnav {
     background-color: #cdcccc;
     overflow: hidden;
+    margin-left: -65px;
   }
   
   .topnav a {
@@ -21,4 +22,14 @@
   .topnav a.active {
     background-color: #e7ece7;
     color: rgb(14, 14, 14);
+  }
+  
+  button {
+    background-color: rgb(226, 229, 223);
+  }
+  body {
+    margin-left: 65px;
+  }
+  input {
+    background-color: yellowgreen;
   }
