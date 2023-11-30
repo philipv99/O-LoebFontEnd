@@ -9,8 +9,34 @@
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
-   
+   <form>
+      <div class="topnav">
+         <a class="active" href="#O-Løb">O-Løb</a>
+         <a href="">1</a>
+         <a href="">2</a>
+         <a href="">3</a>
+      </div>
+   </form>  
+   <h1>Opret Løb</h1>
+   <form>
+      <input type="text" id="fname" name="fname" value="Opret Navn"><br>
+   </form>
+   <form action="/action_page.php">
+      <label for="cars">Vælg Løbstype:</label>
+      <select name="cars" id="cars">
+      <option value="O-Løb">O-Løb</option>
+      <option value="Stjerneløb">Stjerneløb</option>
+      </select>
+   </form>
+   <form>
+      <button>Tilføj</button>
+   </form>
+
+   <form>
+      <input type="submit" value="Lav Post">
+   </form>
    <script src="./index.js"></script>
 </body>
 </html>
