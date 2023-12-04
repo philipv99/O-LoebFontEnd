@@ -1,35 +1,30 @@
+nav a{
+  text-decoration: none;
+  color: black;
+  font-size: 22px;
+  font-weight: 200;
+}
 
-.topnav {
-    background-color: #cdcccc;
-    overflow: hidden;
-    margin-left: -65px;
-  }
-  
-  .topnav a {
-    float: center;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 30px;
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: rgb(255, 252, 252);
-  }
-  
-  .topnav a.active {
-    background-color: #e7ece7;
-    color: rgb(14, 14, 14);
-  }
-  
-  button {
-    background-color: rgb(226, 229, 223);
-  }
-  body {
-    margin-left: 65px;
-  }
-  input {
-    background-color: rgb(226, 229, 223);
-  }
+*{
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+
+a:hover{
+  transform:translate(0px, -3px) scale(1.1);
+  filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 2px 5px);
+}
+
+button:hover{
+  transform:translate(0px, -4px) scale(1.03);
+  filter: drop-shadow(rgba(0, 0, 0, 0.3) 0px 0px 5px);
+}
+
+.row{
+  min-height: 500px;
+}
+
+
+form button{
+  width: 50%;
+  margin: 0 auto;
+}
