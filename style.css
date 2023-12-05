@@ -36,3 +36,8 @@ form button{
   z-index: 10;
   min-width: 50vw;
 }
+
+div input ,div textarea{
+  padding: .8rem;
+  border-radius: .375rem;
+}
