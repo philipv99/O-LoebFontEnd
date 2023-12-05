@@ -1,16 +1,17 @@
-const GetUrl = "http"
-const PoshUrl = "http"
+const BaseUrl = "https://o-loebrest20231128112940.azurewebsites.net"
+const GetRunUrl = BaseUrl + "/api/Runs/" // + "id"
+const PoshRunsUrl = BaseUrl + "/api/Runs"
 
 Vue.createApp({
    data(){
       return{
          ListOfPosts: [],
          RunToAdd: {
-            Name: "",
-            Posts: [],
-            Time: 0,
-            Type: ""
-         }
+            Id: 0,
+            Name: "hej",
+            RunType: "oløb"
+         },
+         ShowAddPostForm: true,
       };
    },
    methods:{
@@ -25,16 +26,16 @@ Vue.createApp({
          }
       },
       async PoshNewRun(){
+         //await axios.post(PoshRunsUrl, this.RunToAdd)
          try{
-            response = await axios.post(RunToAdd, Poshurl)
-            console.log(response)
-         }
-         catch (ex) {
-            alert(ex.message)
-         }
+             response = await axios.post(PoshRunsUrl, this.RunToAdd).then(response => {console.log(response.status, response.data.token)})
+          }
+          catch (ex) {
+             alert(ex.message)
+          }
       },
       addPost(){
          
       }
    }
-})
+}).mount("#app")

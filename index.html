@@ -26,47 +26,42 @@
    </nav>
       
 
-   <section>
+   <section id="app">
       <div class="container mt-4">
          <h1>Opret Løb</h1>
          <div class="row">
             <div class="col-6">
 
-               <form class="d-flex flex-column h-100">
+               <form @submit.prevent.self class="d-flex flex-column h-100">
                   <label for="Runname">Løbs navn:</label>
-                  <input v-model="RunToAdd.Name" type="text" id="fname" name="fname" placeholder="Løbs navn" class="p-2 rounded mb-4">
+                  <input v-model="RunToAdd.Name" type="text" placeholder="Løbs navn" class="p-2 rounded mb-4">
             
-                  <div class="d-flex flex-row w-100 justify-content-between">
-                     <div>
-                        <label for="Runtype">Løbstype:</label>
-                        <select v-model="RunToAdd.Type" name="type" id="Runtype" class="dropdown p-2 rounded  mb-4">
-                           <option value="O-Løb" selected>O-Løb</option>
-                           <option value="Stjerneløb">Stjerneløb</option>
-                        </select>
-                     </div>
-                     <div>
-                        <label for="Runtime">Løbstype:</label>
-                        <input v-model="RunToAdd.Time" type="time" name="time" id="RunTime" class="dropdown p-2 rounded  mb-4">
-                        </input>
-                     </div>
-                  </div>
+                  <label for="Runtype">Løbstype:</label>
+                  <select v-model="RunToAdd.Type" class="dropdown p-2 rounded  mb-4">
+                     <option value="oløb" selected>O-Løb</option>
+                     <option value="stjerneløb">Stjerneløb</option>
+                  </select>
       
-                  <Button type="add" class="btn btn-primary shadow mb-4">Tilføj post</Button>
+                  <Button v-on:click="ShowAddPostForm = !ShowAddPostForm" class="btn btn-primary shadow mb-4">Tilføj post</Button>
 
-                  <div class="p-3 rounded bg-info mb-4 bg-opacity-25">
+                  <div class="addpostform p-3 d-flex flex-row bg-opacity-75 bg-warning rounded shadow" v-show="ShowAddPostForm">
+                     <div class="p-2 rounded shadow-sm bg-white mb-2">Post</div>
+                  </div>
+
+                  <div class="p-4 rounded bg-info mb-4 bg-opacity-25">
                      <!-- // for værd post vis -->
                      <div v-for="item in ListOfPosts" class="p-3 rounded bg-light bg-opacity-100 fs-5 border-1 border-dark shadow">
                         <h4 class="m-0">{{item.Name}}</h4>
                         <div class="d-flex justify-content-around flex-row">
-                           <span><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M406.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224l-293.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288l293.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/></svg>  {{item.CordinateWE}}</span>
-                           <span><svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3V402.7L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7V109.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z"/></svg>  {{item.CordinateNS}}</span>
+                           <span><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M406.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224l-293.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288l293.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/></svg>  {{item.CordinateWE}}</span>
+                           <span><svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><path d="M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3V402.7L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7V109.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z"/></svg>  {{item.CordinateNS}}</span>
                            
                         </div>
                      </div>
-                     <div v-if="ListOfPosts.Lenght() < 1">*der er ikke added nogen poster</div>
+                     <div v-if="ListOfPosts.length < 1">*der er ikke Tilføjet nogen poster</div>
                   </div>
             
-                  <button v-on:click="PoshNewRun()" type="submit" value="Lav Post" class="btn btn-success shadow mb-4">Lav Post</button>
+                  <button v-on:click="PoshNewRun()" type="submit" value="Lav Post" class="btn btn-success shadow mb-4">Opret Run</button>
                
                </form>
 
