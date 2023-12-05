@@ -28,3 +28,8 @@ form button{
   width: 50%;
   margin: 0 auto;
 }
+
+div input ,div textarea{
+  padding: .8rem;
+  border-radius: .375rem;
+}
