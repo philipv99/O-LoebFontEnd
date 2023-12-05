@@ -8,20 +8,23 @@
     <title>Quizquestions</title>
 </head>
 <body>
-    <main class="w-100 d-flex flex-column justify-content-center align-items-center">
+   
         <nav class=" bg-light w-100">
             <div class="container d-flex justify-content-between  flex-row fs-4">
-               <div class="w-50">
-                  <a class="active text-decoration-none text-black" href="#O-Løb">O-Løb</a>
-               </div>
+                <div class="w-50">
+                    <a class="active text-decoration-none text-black" href="#O-Løb">O-Løb</a>
+                </div>
                
-               <div class="w-50 d-flex justify-content-between">
-                  <a href="">a</a>
-                  <a href="">b</a>
-                  <a href="">c</a>
-               </div>
+                <div class="w-50 d-flex justify-content-between">
+                    <a href="./post.html">Opret post</a>
+                    <a href="./quizquestions.html">Opret spørsmål</a>
+                    <a href="./index.html">Opret løb</a>
+                    <a href="./seeruns.html">Se løb</a>
+                </div>
             </div>
-         </nav>
+        </nav>
+
+    <main class="w-100 d-flex flex-column justify-content-center align-items-center mt-4">
         <h1>Opret spørgsmål</h1>
         <form action="" class="w-50 d-flex justify-content-center flex-column">
             <div class="d-flex flex-column p-1">
@@ -33,23 +36,23 @@
                     *Sæt flueben ved det rigtige svar
                 </p>
                 <div class="mb-2 d-flex justify-content-around">
-                    <input type="radio" >
+                    <input type="radio" name="index" class="form-check-input">
                     <input type="text" class="w-75" placeholder="svar 1">
                 </div>
                 <div class="mb-2 d-flex justify-content-around">
-                    <input type="radio">
+                    <input type="radio" name="index" class="form-check-input">
                     <input type="text" class="w-75" placeholder="svar 2">
                 </div>
                 <div class="mb-2 d-flex justify-content-around">
-                    <input type="radio">
+                    <input type="radio" name="index" class="form-check-input">
                     <input type="text" class="w-75" placeholder="svar 3">
                 </div>
                 <div class="mb-2 d-flex justify-content-around">
-                    <input type="radio">
+                    <input type="radio" name="index" class="form-check-input">
                     <input type="text" class="w-75" placeholder="svar 4">
                 </div>
             </div>
-            <button v-on:click="PoshNewQuestion()" type="submit" value="Lav spørgsmål" class="btn btn-success shadow mb-4">Opret spørgsmål</button>
+            <button v-on:click="PoshNewQuestion()" type="submit" value="Lav spørgsmål" class="btn btn-success shadow my-4">Opret spørgsmål</button>
         </form>
     </main>
 </body>

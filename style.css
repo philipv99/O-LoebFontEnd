@@ -27,6 +27,7 @@ button:hover{
 form button{
   width: 50%;
   margin: 0 auto;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 }
 
 .addpostform{
@@ -37,7 +38,15 @@ form button{
   min-width: 50vw;
 }
 
-div input ,div textarea{
+div input ,div textarea, div select{
+  font-size: 20px;
   padding: .8rem;
   border-radius: .375rem;
+  border:none;
+  background: #dadada;
 }
+
+input[type=radio]{
+  align-self: center;
+}
+

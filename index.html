@@ -6,6 +6,7 @@
    <title>O-løb</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
@@ -18,9 +19,10 @@
          </div>
          
          <div class="w-50 d-flex justify-content-between">
-            <a href="">Opret post</a>
-            <a href="">Opret spørsmål</a>
-            <a href="">Se løb</a>
+            <a href="./post.html">Opret post</a>
+            <a href="./quizquestions.html">Opret spørsmål</a>
+            <a href="./index.html">Opret løb</a>
+            <a href="./seeruns.html">Se løb</a>
          </div>
       </div>
    </nav>
@@ -34,32 +36,45 @@
 
                <form @submit.prevent.self class="d-flex flex-column h-100">
                   <label for="Runname">Løbs navn:</label>
-                  <input v-model="RunToAdd.Name" type="text" placeholder="Løbs navn" class="p-2 rounded mb-4">
+                  <input v-model="RunToAdd.Name" type="text" placeholder="Løbs navn" class="rounded mb-4">
             
                   <label for="Runtype">Løbstype:</label>
-                  <select v-model="RunToAdd.Type" class="dropdown p-2 rounded  mb-4">
+                  <select v-model="RunToAdd.Type" class="dropdown rounded mb-4">
                      <option value="oløb" selected>O-Løb</option>
                      <option value="stjerneløb">Stjerneløb</option>
                   </select>
       
-                  <div class="addpostform p-4 d-flex flex-column bg-info rounded shadow" v-show="ShowAddPostForm">
-                     <div class="p-2 rounded shadow-sm bg-white mb-2 w-100">{Post}</div>
-                     <div class="p-2 rounded shadow-sm bg-white mb-2 w-100">{Post}</div>
+                  <div class="addpostform p-4 bg-info rounded-4 shadow" v-show="showAddPostForm">
+                     <div v-for="post in ListOfPosts" class="p-3 rounded-3 shadow-sm bg-white mb-3 w-100 d-flex flex-column">
+                        <button v-on:click="addPost(post)" class="nostyle w-100 h-100 bg-transparent border-0">
+                           <div class="w-100 d-flex justify-content-between">
+                              <h4>{{post.name}}</h4> 
+                              <h4>{{post.id}}</h4> 
+                           </div>
+                           <div class="px-5 w-100 d-flex justify-content-between text-opacity-50 text-black">
+                              <h5><i class="bi bi-arrows"></i> {{post.gpsLatitude}}</h5> 
+                              <h5><i class="bi bi-arrows-vertical"></i>{{post.gpsLongitude}}</h5> 
+                           </div>
+                        </button>
+                     </div>
+                     <p v-if="ListOfPosts < 1" class="text-black-50 p-0 m-0">Kunne ikke finde nogen posts</p>
                   </div>
+
 
                   <Button v-on:click="ButtenPress()" class="btn btn-primary shadow mb-4">Tilføj post</Button>
 
-                  <div class="p-4 rounded bg-info mb-4 bg-opacity-25">
-                     <!-- // for værd post vis -->
-                     <div v-for="item in ListOfPosts" class="p-3 rounded bg-light bg-opacity-100 fs-5 border-1 border-dark shadow">
-                        <h4 class="m-0">{{item.Name}}</h4>
+                  <div class="p-2 rounded bg-info mb-4 bg-opacity-25">
+                   
+                     <div v-for="item in addedPosts" class="p-3 rounded bg-light bg-opacity-100 fs-5 border-1 border-dark shadow mb-3">
+                        <h4 class="m-0">{{item.name}}</h4>
                         <div class="d-flex justify-content-around flex-row">
-                           <span><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M406.6 374.6l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224l-293.5 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288l293.5 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/></svg>  {{item.CordinateWE}}</span>
-                           <span><svg xmlns="http://www.w3.org/2000/svg" height="16" width="10" viewBox="0 0 320 512"><path d="M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3V402.7L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7V109.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z"/></svg>  {{item.CordinateNS}}</span>
-                           
+                           <span><i class="bi bi-arrows"></i>  {{item.gpsLatitude}}</span>
+                           <span><i class="bi bi-arrows-vertical"></i>  {{item.gpsLongitude}}</span>
                         </div>
                      </div>
-                     <div v-if="ListOfPosts.length < 1">*der er ikke Tilføjet nogen poster</div>
+
+                     <div v-if="addedPosts.length < 1">*der er ikke Tilføjet nogen poster</div>
+
                   </div>
             
                   <button v-on:click="PoshNewRun()" class="btn btn-success shadow mb-4">Opret Run</button>
@@ -68,7 +83,7 @@
 
             </div>
             <div class="col-6">
-               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d18098.93295580533!2d12.181146555712886!3d55.456275197846296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sda!2sdk!4v1701681503661!5m2!1sda!2sdk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d23683.96067136012!2d12.04396548068963!3d55.63219003170307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sda!2sdk!4v1701819635601!5m2!1sda!2sdk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
          </div>
