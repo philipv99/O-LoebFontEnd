@@ -15,7 +15,7 @@ a:hover{
 }
 
 button:hover{
-  transform:translate(0px, -4px) scale(1.03);
+  transform:translate(0px, -2px) scale(1.03);
   filter: drop-shadow(rgba(0, 0, 0, 0.3) 0px 0px 5px);
 }
 
@@ -27,4 +27,12 @@ button:hover{
 form button{
   width: 50%;
   margin: 0 auto;
+}
+
+.addpostform{
+  position: fixed;
+  bottom: 50%;
+  right: 25%;
+  z-index: 10;
+  min-width: 50vw;
 }

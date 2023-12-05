@@ -42,11 +42,12 @@
                      <option value="stjerneløb">Stjerneløb</option>
                   </select>
       
-                  <Button v-on:click="ShowAddPostForm = !ShowAddPostForm" class="btn btn-primary shadow mb-4">Tilføj post</Button>
-
-                  <div class="addpostform p-3 d-flex flex-row bg-opacity-75 bg-warning rounded shadow" v-show="ShowAddPostForm">
-                     <div class="p-2 rounded shadow-sm bg-white mb-2">Post</div>
+                  <div class="addpostform p-4 d-flex flex-column bg-info rounded shadow" v-show="ShowAddPostForm">
+                     <div class="p-2 rounded shadow-sm bg-white mb-2 w-100">{Post}</div>
+                     <div class="p-2 rounded shadow-sm bg-white mb-2 w-100">{Post}</div>
                   </div>
+
+                  <Button v-on:click="ButtenPress()" class="btn btn-primary shadow mb-4">Tilføj post</Button>
 
                   <div class="p-4 rounded bg-info mb-4 bg-opacity-25">
                      <!-- // for værd post vis -->
@@ -61,8 +62,8 @@
                      <div v-if="ListOfPosts.length < 1">*der er ikke Tilføjet nogen poster</div>
                   </div>
             
-                  <button v-on:click="PoshNewRun()" type="submit" value="Lav Post" class="btn btn-success shadow mb-4">Opret Run</button>
-               
+                  <button v-on:click="PoshNewRun()" class="btn btn-success shadow mb-4">Opret Run</button>
+                  <p class="text-success text-center fs-6 m-0 p-0">{{AddedPostSuccesMessege}}</p>
                </form>
 
             </div>

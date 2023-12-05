@@ -5,13 +5,15 @@ const PoshRunsUrl = BaseUrl + "/api/Runs"
 Vue.createApp({
    data(){
       return{
+         ShowAddPostForm: false,
+
          ListOfPosts: [],
+         AddedPostSuccesMessege: "",
          RunToAdd: {
             Id: 0,
-            Name: "hej",
-            RunType: "oløb"
+            Name: "",
+            RunType: ""
          },
-         ShowAddPostForm: true,
       };
    },
    methods:{
@@ -28,7 +30,10 @@ Vue.createApp({
       async PoshNewRun(){
          //await axios.post(PoshRunsUrl, this.RunToAdd)
          try{
-             response = await axios.post(PoshRunsUrl, this.RunToAdd).then(response => {console.log(response.status, response.data.token)})
+            response = await axios.post(PoshRunsUrl, this.RunToAdd).then(response => {console.log(response.status, response.data.token)})
+            this.AddedPostSuccesMessege = "Løb blev tilføjet"
+            this.RunToAdd.Name = ""
+            this.RunToAdd.RunType = ""
           }
           catch (ex) {
              alert(ex.message)
@@ -36,6 +41,10 @@ Vue.createApp({
       },
       addPost(){
          
+      },
+      ButtenPress(){
+         this.ShowAddPostForm = !this.ShowAddPostForm 
+         console.log("show was pressed:", this.ShowAddPostForm)
       }
    }
 }).mount("#app")
