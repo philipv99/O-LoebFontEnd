@@ -50,15 +50,20 @@ Vue.createApp({
          },
       };
    },
-   methods:{
-      async GetPosts(){
+   async created(){
+      this.ListOfPosts.push(this.GetAll(GetPostUrl))
+   },
+   methods: {
+      async GetAll(Url){
          try{
-            response = await axios.get(GetPostUrl)
-            this.ListOfPosts = await response.data
-            console.log(response.data)
+            response = await axios.get(Url)
+            value = await response.data
+            console.log(value)
+            return value
          }
          catch (ex){
             alert(ex.message)
+            console.log(Url, "did not respond")
          }
       },
       async PoshNewRun(){
@@ -74,17 +79,19 @@ Vue.createApp({
       },
       addPost(object){
          try {
-            addedPosts = addedPosts.push(object)
+            this.addedPosts.push(object)
+            this.ListOfPosts.pop(object)
             console.log(addedPosts)
          } catch (error) {
             console.log(error)
          }
-         
+         this.showAddPostForm = false
       },
       ButtenPress(){
          this.showAddPostForm = !this.showAddPostForm 
          console.log("show was pressed:", this.showAddPostForm)
-         //this.GetPosts()
       }
    }
 }).mount("#app")
+
+

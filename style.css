@@ -7,6 +7,7 @@ nav a{
 
 *{
   transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+  box-sizing: border-box;
 }
 
 a:hover{
@@ -43,10 +44,24 @@ div input ,div textarea, div select{
   padding: .8rem;
   border-radius: .375rem;
   border:none;
-  background: #dadada;
+  background: #fff;
 }
 
 input[type=radio]{
   align-self: center;
 }
 
+.closeicon:hover{
+  transform:scale(1.03);
+  filter: drop-shadow(rgba(238, 17, 17, 0.3) 0px 0px 5px);
+}
+
+
+body{
+  background-image: url(https://images.pexels.com/photos/340932/pexels-photo-340932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+  background-position: center;
+  background-size:200vh;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(50px);
+  min-height: 100vh;
+}

@@ -45,6 +45,10 @@
                   </select>
       
                   <div class="addpostform p-4 bg-info rounded-4 shadow" v-show="showAddPostForm">
+                     <div class="w-100 d-flex justify-content-between mb-3">
+                        <h2>Tilføj poster til løbet</h2>
+                        <button v-on:click="showAddPostForm = false" class="m-0 w-auto fs-3 bg-transparent text-danger border-0 closeicon"><i class="bi bi-x-circle-fill"></i></button>
+                     </div>
                      <div v-for="post in ListOfPosts" class="p-3 rounded-3 shadow-sm bg-white mb-3 w-100 d-flex flex-column">
                         <button v-on:click="addPost(post)" class="nostyle w-100 h-100 bg-transparent border-0">
                            <div class="w-100 d-flex justify-content-between">
