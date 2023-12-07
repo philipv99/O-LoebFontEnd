@@ -32,7 +32,6 @@
             <h1>Opret spørgsmål</h1>
             <form @submit.prevent.self class="w-50 d-flex justify-content-center flex-column">
                 <div class="d-flex flex-column p-1">
-                    <input v-model="Question.Name" class="mb-4" type="text" placeholder="spørgsmål navn ">
                     <textarea v-model="Question.QuestionToAnswer" class="mb-4" placeholder="spørgsmål tekst"></textarea>
                 </div>
                 <div class="w-100 d-flex justify-content-center flex-column">

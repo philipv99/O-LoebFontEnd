@@ -23,7 +23,17 @@ Vue.createApp({
             "gpsLatitude": 23.23232,
             "gpsLongitude": 110.23232,
             "runId": 0  
-         }],
+         },
+         {
+            "id": 1,
+            "name": "roskirke",
+            "sequenceNumber": 1,
+            "sadius": 23,
+            "gpsLatitude": 23.23232,
+            "gpsLongitude": 110.23232,
+            "runId": 0  
+         },
+         ],
          addedPosts:[{
             "id": 0,
             "name": "roskirke",

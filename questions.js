@@ -7,7 +7,6 @@ Vue.createApp({
       return{
          Question: {
             Id: 0,
-            Name: "",
             QuestionToAnswer: "",
             IsAnswered: false,
             PostId: -1
@@ -42,7 +41,7 @@ Vue.createApp({
          }
       },
       async addQuestion(){
-         this.check()
+         //this.check()
          try{
             response = await axios.post(PoshQuestions, this.Question)
             console.log(response)
@@ -50,7 +49,8 @@ Vue.createApp({
          catch(error) {
             console.log(error)
          }
-         this.addAnswers(response.id)
+         //this.addAnswers(response.id)
+         console.log()
       },
       addAnswers(id){
          try{

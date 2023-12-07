@@ -1,3 +1,5 @@
+
+
 nav a{
   text-decoration: none;
   color: black;
@@ -39,6 +41,11 @@ form button{
   min-width: 50vw;
 }
 
+.overflowY-scroll{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 div input ,div textarea, div select{
   font-size: 20px;
   padding: .8rem;
@@ -56,12 +63,15 @@ input[type=radio]{
   filter: drop-shadow(rgba(238, 17, 17, 0.3) 0px 0px 5px);
 }
 
+.max-h{
+  max-height: 40vh;
+}
 
 body{
   background-image: url(https://images.pexels.com/photos/340932/pexels-photo-340932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
   background-position: center;
   background-size:200vh;
-  background-repeat: no-repeat;
   backdrop-filter: blur(50px);
   min-height: 100vh;
+  height: 100%;
 }
