@@ -7,8 +7,9 @@ Vue.createApp({
    data(){
       return{
          selectedRunid: -1,
-         ListOfRuns: [{
-         }],
+         ListOfRuns: [],
+         addedPost:[
+      ],
          post:{
             Id: 0,
             Name: "",
@@ -48,7 +49,7 @@ Vue.createApp({
       },
       PushPost(){
          this.post.RunId = selectedRunid
-         
+
       }
    }
 }).mount("#app")
