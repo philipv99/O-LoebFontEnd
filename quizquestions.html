@@ -27,36 +27,90 @@
     </nav>
     
     <section id="app">
-        <main class="w-100 d-flex flex-column justify-content-center align-items-center mt-4">
-            <h1>Opret spørgsmål</h1>
-            <form @submit.prevent.self class="w-50 d-flex justify-content-center flex-column">
-                <div class="d-flex flex-column p-1">
-                    <textarea v-model="Question.QuestionToAnswer" class="mb-4" placeholder="spørgsmål tekst"></textarea>
+        <main>
+            <div class="w-100 d-flex flex-column justify-content-center align-items-center mt-4">
+                <h1>Vælg Post</h1>
+                <p>Spørgsmpålende du laver vil blive tilføjet til denne post</p>
+                <div class="p-2 bg-light rounded my-3 w-50 overflowY-scroll max-h">
+                 
+                
+                <div v-for="item in Posts" 
+                    v-if="Posts.length > 0"
+                    class="mb-2 p-1 bg-primary rounded text-white shadow d-flex justify-content-evenly flex-column">
+                    <button v-on:click="chosenPost(item)" class="border-0 bg-transparent text-white">
+                        <div class="d-flex justify-content-between border-bottom border-white">
+                            <h4>{{item.name}}</h4>
+                            <h4>Nr: {{item.sequenceNumber}}</h4>
+                        </div>
+                        <div class="container">
+                            <div class="d-flex justify-content-between mb-1">
+                                <div>
+                                    <span><i class="bi bi-arrows fs-4"></i> Breddegrad: {{item.gpsLatitude}}</span>
+                                </div>
+                                <div>
+                                    <span><i class="bi bi-arrows-vertical p-2 fs-4"></i>længegrad: {{item.gpsLongitude}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h5>Radius:</h5>
+                                <h5>{{item.radius}} meter</h5>
+                            </div>
+                        </div>
+                    </button>
                 </div>
-                <div class="w-100 d-flex justify-content-center flex-column">
-                    <p class="text-warning px-5">
-                        *Sæt flueben ved det rigtige svar
-                    </p>
-                    <div class="mb-2 d-flex justify-content-around">
-                        <input v-model.number="AwnserId" type="radio" id="1" value="1" name="index" class="form-check-input">
-                        <input v-model="tempAwnser1" type="text" class="w-75" placeholder="svar 1">
-                    </div>
-                    <div class="mb-2 d-flex justify-content-around">
-                        <input v-model.number="AwnserId" type="radio" id="2" value="2" name="index" class="form-check-input">
-                        <input v-model="tempAwnser2" type="text" class="w-75" placeholder="svar 2">
-                    </div>
-                    <div class="mb-2 d-flex justify-content-around">
-                        <input v-model.number="AwnserId" type="radio" id="3" value="3" name="index" class="form-check-input">
-                        <input v-model="tempAwnser3" type="text" class="w-75" placeholder="svar 3">
-                    </div>
-                    <div class="mb-2 d-flex justify-content-around">
-                        <input v-model.number="AwnserId" type="radio" id="4" value="4" name="index" class="form-check-input">
-                        <input v-model="tempAwnser4" type="text" class="w-75" placeholder="svar 4">
-                    </div>
-                    <p class="text-warning px-5">Det rigtige svar bliver:  {{AwnserId}}</p>
+                    <p v-show="Posts.length < 1">*poster er ikker loaded ind</p>
                 </div>
-                <button v-on:click="addQuestion()" type="submit" value="Lav spørgsmål" class="btn btn-success shadow my-4">Opret spørgsmål</button>
-            </form>
+
+                <div class="container d-flex justify-content-center">
+                    <div class="card w-50 p-3 bg-success text-white shadow">
+                        <div class="d-flex justify-content-between flex-row border-bottom">
+                            <h4>{{ChosenPost.name}}</h4>
+                            <h4>Nr: {{ChosenPost.sequenceNumber}}</h4>
+                        </div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <div>
+                               <span><i class="bi bi-arrows fs-4"></i> Breddegrad: {{ChosenPost.GpsLatitude}}</span>
+                            </div>
+                            <div>
+                               <span><i class="bi bi-arrows-vertical p-2 fs-4"></i>længegrad: {{ChosenPost.GpsLongitude}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!---------     opret spørgsmål     ------------->
+            <div class="w-100 d-flex flex-column justify-content-center align-items-center mt-4">
+                <h1>Opret spørgsmål</h1>
+                <form @submit.prevent.self class="w-50 d-flex justify-content-center flex-column">
+                    <div class="d-flex flex-column p-1">
+                        <textarea v-model="Question.QuestionToAnswer" class="mb-4" placeholder="spørgsmål tekst"></textarea>
+                    </div>
+                    <div class="w-100 d-flex justify-content-center flex-column">
+                        <p class="text-warning px-5">
+                            *Sæt flueben ved det rigtige svar
+                        </p>
+                        <div class="mb-2 d-flex justify-content-around">
+                            <input v-model.number="AwnserId" type="radio" id="0" v-bind:value="0" name="index" class="form-check-input">
+                            <input v-model="tempAwnser1" type="text" class="w-75" placeholder="svar 1">
+                        </div>
+                        <div class="mb-2 d-flex justify-content-around">
+                            <input v-model.number="AwnserId" type="radio" id="1" v-bind:value="1" name="index" class="form-check-input">
+                            <input v-model="tempAwnser2" type="text" class="w-75" placeholder="svar 2">
+                        </div>
+                        <div class="mb-2 d-flex justify-content-around">
+                            <input v-model.number="AwnserId" type="radio" id="2" v-bind:value="2" name="index" class="form-check-input">
+                            <input v-model="tempAwnser3" type="text" class="w-75" placeholder="svar 3">
+                        </div>
+                        <div class="mb-2 d-flex justify-content-around">
+                            <input v-model.number="AwnserId" type="radio" id="3" v-bind:value="3" name="index" class="form-check-input">
+                            <input v-model="tempAwnser4" type="text" class="w-75" placeholder="svar 4">
+                        </div>
+                        <p class="text-warning px-5">Det rigtige svar bliver: svar {{(AwnserId + 1)}}</p>
+                    </div>
+                    <button v-on:click="addQuestion()" type="submit" value="Lav spørgsmål" class="btn btn-success shadow my-4">Opret spørgsmål</button>
+                </form>
+            </div>
         </main>
     </section>
     <script src="./questions.js"></script>
