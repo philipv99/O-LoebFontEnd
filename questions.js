@@ -1,6 +1,6 @@
 const BaseUrl = "https://o-loebrest20231128112940.azurewebsites.net"
 const QuestionsUrl = BaseUrl + "/api/Questions"
-const AwnsersUrl = BaseUrl + "/api/Awnsers"
+const AwnsersUrl = BaseUrl + "/api/Answer"
 const PostUrl = BaseUrl + "/api/Posts" // + "id"
 
 
@@ -21,10 +21,7 @@ Vue.createApp({
          },
          AwnserId: 0,
          Posts: [],
-         tempAwnser1: "",
-         tempAwnser2: "",
-         tempAwnser3: "",
-         tempAwnser4: "",
+         tempAwnsers: ["","","",""],
          ChosenPost: {},
       };
    },
@@ -44,44 +41,45 @@ Vue.createApp({
          }
       },
       async addQuestion(){
-         //this.check()
          try{
-            //response = await axios.post(QuestionsUrl, this.Question)
-            this.Question.Id = 4
-            console.log(this.Question)
-            this.addAnswers(this.Question.Id)
+            response = await axios.post(QuestionsUrl, this.Question)
+            await console.log(response)
          }
          catch(error) {
             console.log(error)
          }
-         //this.addAnswers(response.id)
-         console.log()
+         //this.addAnswers(response.data.id)
       },
       chosenPost(item){
          this.ChosenPost = item
          this.Question.PostId = item.id
-         console.log(this.ChosenPost)
-         console.log("id of post",this.Question.PostId)
+         console.log("id of post",this.Question)
       },
-      async addAnswers(id){
+      addAnswers(id){
          try{
             for(let i = 0; i < 4; i++){
                senditem = {...this.Awnsers}
                senditem.QuestionId = id
-               if(i === AwnserId){
-                  senditem.IsAnswered
+               senditem.AnswerToQuestion = this.tempAwnsers[i]
+               if(i === this.AwnserId){
+                  senditem.IsCorrectAnswer = true
                }
-
-               console.log(senditem)
+               console.log("Svar: ", i ,senditem)
+               this.sendAnswers(senditem)
             }
          }
          catch (error){
             console.log(error)
          }
       },
-      // check(){
-      //   
-         //}
-      //}
+      async sendAnswers(item){
+         try{
+            response = await axios.post(AwnsersUrl, item)
+            console.log(response)
+         }
+         catch(error){
+            console.log(error)
+         }
+      }
    }
 }).mount("#app")

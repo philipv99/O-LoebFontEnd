@@ -9,8 +9,7 @@ Vue.createApp({
          selectedRunid: -1,
          indexOfList: 1,
          ListOfRuns: [],
-         addedPost:[
-      ],
+         addedPost:[],
          post:{
             Id: 0,
             Name: "",

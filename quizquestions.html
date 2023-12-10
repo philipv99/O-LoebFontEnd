@@ -92,19 +92,19 @@
                         </p>
                         <div class="mb-2 d-flex justify-content-around">
                             <input v-model.number="AwnserId" type="radio" id="0" v-bind:value="0" name="index" class="form-check-input">
-                            <input v-model="tempAwnser1" type="text" class="w-75" placeholder="svar 1">
+                            <input v-model="tempAwnsers[0]" type="text" class="w-75" placeholder="svar 1">
                         </div>
                         <div class="mb-2 d-flex justify-content-around">
                             <input v-model.number="AwnserId" type="radio" id="1" v-bind:value="1" name="index" class="form-check-input">
-                            <input v-model="tempAwnser2" type="text" class="w-75" placeholder="svar 2">
+                            <input v-model="tempAwnsers[1]" type="text" class="w-75" placeholder="svar 2">
                         </div>
                         <div class="mb-2 d-flex justify-content-around">
                             <input v-model.number="AwnserId" type="radio" id="2" v-bind:value="2" name="index" class="form-check-input">
-                            <input v-model="tempAwnser3" type="text" class="w-75" placeholder="svar 3">
+                            <input v-model="tempAwnsers[2]" type="text" class="w-75" placeholder="svar 3">
                         </div>
                         <div class="mb-2 d-flex justify-content-around">
                             <input v-model.number="AwnserId" type="radio" id="3" v-bind:value="3" name="index" class="form-check-input">
-                            <input v-model="tempAwnser4" type="text" class="w-75" placeholder="svar 4">
+                            <input v-model="tempAwnsers[3]" type="text" class="w-75" placeholder="svar 4">
                         </div>
                         <p class="text-warning px-5">Det rigtige svar bliver: svar {{(AwnserId + 1)}}</p>
                     </div>

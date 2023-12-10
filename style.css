@@ -18,7 +18,7 @@ a:hover{
 }
 
 button:hover{
-  transform:translate(0px, -2px) scale(1.03);
+  transform:translate(0px, -1px) scale(1.01);
   filter: drop-shadow(rgba(0, 0, 0, 0.3) 0px 0px 5px);
 }
 
@@ -69,8 +69,8 @@ input[type=radio]{
 
 body{
   background-image: url(https://images.pexels.com/photos/340932/pexels-photo-340932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
-  background-position: center;
-  background-size:200vh;
+  background-position:center;
+  background-size:cover;
   backdrop-filter: blur(50px);
   min-height: 100vh;
   height: 100%;
