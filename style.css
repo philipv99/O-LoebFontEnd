@@ -75,3 +75,43 @@ body{
   min-height: 100vh;
   height: 100%;
 }
+
+
+.run {
+  width: 100%;
+  background: #ffff;
+  margin-bottom: 25px;
+  display: flex;
+  padding:10px;
+  flex-direction: row;
+}
+
+.run a{
+  display:flex;
+  justify-content:center;
+}
+
+.run-segments {
+  width: 30%;
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.run-header {
+  height: 30%;
+  width: 100%;
+  color: #645f5a;
+  background-color: #ffff;
+}
+
+.run-normal {
+  height: 30%;
+  width: 100%;
+  font-size: 20px;
+  line-height: 1.8rem;
+  color: #000f;
+  background-color: #ffff;
+  margin-bottom: 2.5px;
+}
