@@ -9,7 +9,7 @@ Vue.createApp({
       return{
          Question: {
             Id: 0,
-            QuestionToAnswer: "",
+            QuestionToAnswer: "hej",
             IsAnswered: false,
             PostId: -1
          },
@@ -48,14 +48,14 @@ Vue.createApp({
          catch(error) {
             console.log(error)
          }
-         //this.addAnswers(response.data.id)
+         this.addAnswers(response.data.id)
       },
       chosenPost(item){
          this.ChosenPost = item
          this.Question.PostId = item.id
          console.log("id of post",this.Question)
       },
-      addAnswers(id){
+      async addAnswers(id){
          try{
             for(let i = 0; i < 4; i++){
                senditem = {...this.Awnsers}
@@ -64,22 +64,29 @@ Vue.createApp({
                if(i === this.AwnserId){
                   senditem.IsCorrectAnswer = true
                }
-               console.log("Svar: ", i ,senditem)
-               this.sendAnswers(senditem)
+
+               try{
+                  response = await axios.post(AwnsersUrl, senditem)
+                  console.log("send test: ", response)
+               }
+               catch(error){
+                  console.log(error)
+               }
             }
          }
          catch (error){
             console.log(error)
          }
       },
-      async sendAnswers(item){
-         try{
-            response = await axios.post(AwnsersUrl, item)
-            console.log(response)
+      async getRandomQuestion() {
+         try {
+             const response = await axios.get("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple&fbclid=IwAR3SpLonGPtgnhO8mg5IL4-k25Cyr0NZA005tbdMdxAWo5yDeLeQ2u0PuM0")
+             this.Question.QuestionToAnswer = await response.data.results[0].question
+             console.log(this.Question.QuestionToAnswer)
          }
-         catch(error){
-            console.log(error)
+         catch(error) {
+             console.log(error)
          }
-      }
+     },
    }
 }).mount("#app")

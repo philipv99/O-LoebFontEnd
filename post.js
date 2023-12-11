@@ -48,16 +48,15 @@ Vue.createApp({
          console.log(this.selectedRunid)
       },
       async PushPost(){
-         try{
-            await this.addedPost.forEach(item => {
-               response = axios.post(PostUrl, item)
-               console.log(response, response.status)
-            });
-         }
-         catch(error){
-            console.log(error)
-         }
-         console.log("post done: ", response, response.status)
+         for(let i = 0; i < this.addedPost.length; i++){
+            try{
+               response = await axios.post(PostUrl, this.addedPost[i])
+               console.log("Post respnse: ", i, this.addedPost[i], response)
+            }
+            catch(error){
+               console.log("Post: ", i ,error)
+            }
+         }   
       },
       addPostToList(){
          if(!this.checkPost()){
@@ -73,7 +72,6 @@ Vue.createApp({
             return
          } 
          if(!this.checkPost4()){
-            console.log("check 4 fejl")
             return
          } 
          else{

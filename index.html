@@ -41,46 +41,6 @@
                   <select v-model="RunToAdd.RunType" required placeholder="Vælg løb" class="dropdown rounded mb-4">
                      <option v-for="item in RunTypsList" v-bind:value="item">{{item}}</option>
                   </select>
-                  
-      
-    <!----------- detter er pop up til at tilføje poster ------------------------------------------------------->
-                  <!-- <div class="addpostform p-4 bg-info rounded-4 shadow" v-show="showAddPostForm">
-                     <div class="w-100 d-flex justify-content-between mb-3">
-                        <h2>Tilføj poster til løbet</h2>
-                        <button v-on:click="showAddPostForm = false" class="m-0 w-auto fs-3 bg-transparent text-danger border-0 closeicon"><i class="bi bi-x-circle-fill"></i></button>
-                     </div>
-                     <div v-for="post in ListOfPosts" class="p-3 rounded-3 shadow-sm bg-white mb-3 w-100 d-flex flex-column">
-                        <button v-on:click="addPost(post)" class="nostyle w-100 h-100 bg-transparent border-0">
-                           <div class="w-100 d-flex justify-content-between">
-                              <h4>{{post.name}}</h4> 
-                              <h4>{{post.id}}</h4> 
-                           </div>
-                           <div class="px-5 w-100 d-flex justify-content-between text-opacity-50 text-black">
-                              <h5><i class="bi bi-arrows"></i> {{post.gpsLatitude}}</h5> 
-                              <h5><i class="bi bi-arrows-vertical"></i>{{post.gpsLongitude}}</h5> 
-                           </div>
-                        </button>
-                     </div>
-                     <p v-if="ListOfPosts < 1" class="text-black-50 p-0 m-0">Kunne ikke finde nogen posts</p>
-                  </div> -->
-
-   <!----------- detter er liste til at tilføjede poster ------------------------------------------------------->
-
-                  <!-- <Button v-on:click="ButtenPress()" class="btn btn-primary shadow mb-4">Tilføj post</Button>
-
-                  <div class="p-2 rounded bg-info mb-4 bg-opacity-25">
-                   
-                     <div v-for="item in addedPosts" class="p-3 rounded bg-light bg-opacity-100 fs-5 border-1 border-dark shadow mb-3">
-                        <h4 class="m-0">{{item.name}}</h4>
-                        <div class="d-flex justify-content-around flex-row">
-                           <span><i class="bi bi-arrows"></i>  {{item.gpsLatitude}}</span>
-                           <span><i class="bi bi-arrows-vertical"></i>  {{item.gpsLongitude}}</span>
-                        </div>
-                     </div>
-
-                     <div v-if="addedPosts.length < 1">*der er ikke Tilføjet nogen poster</div>
-
-                  </div> -->
             
                   <button v-on:click="PoshNewRun()" class="btn btn-success shadow mb-4">Opret Run</button>
                </form>

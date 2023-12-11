@@ -82,9 +82,13 @@
             <!---------     opret spørgsmål     ------------->
             <div class="w-100 d-flex flex-column justify-content-center align-items-center mt-4">
                 <h1>Opret spørgsmål</h1>
-                <form @submit.prevent.self class="w-50 d-flex justify-content-center flex-column">
-                    <div class="d-flex flex-column p-1">
-                        <textarea v-model="Question.QuestionToAnswer" class="mb-4" placeholder="spørgsmål tekst"></textarea>
+                <form @submit.prevent.self class="w-75 d-flex justify-content-center flex-column">
+                    <div class="d-flex flex-row p-1">
+                        <textarea v-model="Question.QuestionToAnswer" class=" w-100" placeholder="spørgsmål tekst"></textarea>
+                        <button v-on:click="getRandomQuestion()"
+                        class="btn btn-primary fs-4 p-0 w-25 mx-2 "
+                        ><i class="bi bi-shuffle"></i>
+                        </button>
                     </div>
                     <div class="w-100 d-flex justify-content-center flex-column">
                         <p class="text-warning px-5">
