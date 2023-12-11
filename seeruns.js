@@ -6,130 +6,54 @@ const RunsUrl = BaseUrl + "/api/Runs"
 Vue.createApp({
    data(){
       return{
-         selectedRunid: -1,
-         indexOfList: 1,
-         ListOfRuns: [],
-         addedPost:[],
-         post:{
-            Id: 0,
-            Name: "",
-            SequenceNumber: 0, 
-            Radius: 0,
-            GpsLatitude:0,
-            GpsLongitude: 0,
-            RunId: 0,
-         },
-         
+         selectedRun: -1,
+         ListofRuns: [],
+         ListofPosts: [],
+         FilteredList: [],
       };
    },
    async created(){
-      try{
-         this.GetAllRuns(RunsUrl)
-      }
-      catch(error){
-         console.log(error)
-      }
-      
+        this.GetAllRuns(RunsUrl)
+        
    },
-   methods:{
-      async GetAllRuns(url){
-         try{
+   methods:
+   {
+    async GetAllRuns(url){
+        try{
             response = await axios.get(url)
             console.log(response.status, response)
-            console.log(response.data.length)
-            this.ListOfRuns = response.data
-         }
-         catch(error){
+            this.ListofRuns = response.data
+            }
+            catch(error){
             console.log(error)
-         } 
-      },
-      connectRun(item){
-         this.selectedRunid = item
-         console.log(this.selectedRunid)
-      },
-      async PushPost(){
-         try{
-            await this.addedPost.forEach(item => {
-               response = axios.post(PostUrl, item)
-               console.log(response, response.status)
-            });
-         }
-         catch(error){
-            console.log(error)
-         }
-         console.log("post done: ", response, response.status)
-      },
-      addPostToList(){
-         if(!this.checkPost()){
-            console.log("check 1 fejl")
-            return
-         }
-         if(!this.checkPost2()){
-            console.log("check 2 fejl")
-            return
-         } 
-         if(!this.checkPost3()){
-            console.log("check 3 fejl")
-            return
-         } 
-         if(!this.checkPost4()){
-            console.log("check 4 fejl")
-            return
-         } 
-         else{
-            this.post.RunId = this.selectedRunid.id;
-            this.post.SequenceNumber = this.indexOfList;
-            this.indexOfList = this.indexOfList + 1;
-            let addeditem = {...this.post}
-            this.addedPost.push(addeditem)
-         }
-      },
+            }
+            this.GetAllPosts(PostUrl)
+        },
 
-   // ------------    check  methoder    ---------------- // 
-      checkPost(){
-         if(this.selectedRunid === -1){
-            console.log(this.selectedRunid)
-            alert("Mangler at tilføje løb")
-            return false
-         } if(this.post.GpsLatitude <= -181 && this.post.GpsLatitude >= 181){
-            console.log(this.post.GpsLatitude)
-            alert("breddrad skal være mellem -180 og 180")
-            return false
-         } if(this.post.GpsLongitude <= -91 && this.post.GpsLongitude >= 91){
-            console.log(this.post.GpsLongitude)
-            alert("breddrad skal være mellem -90 og 90")
-            return false
-         }
-         else{
-            return true
-         }
-      },
-      checkPost2(){
-         if(this.post.GpsLatitude < -180 || this.post.GpsLatitude > 180){
-            console.log(this.post.GpsLatitude)
-            alert("bredegrad skal være mellem -180 og 180")
-            return false
-         } else {
-            return true
-         }
-      },
-      checkPost3(){
-         if(this.post.GpsLongitude < -90 || this.post.GpsLongitude > 90){
-            console.log(this.post.GpsLatitude)
-            alert("Længdegrad skal være mellem -90 og 90")
-            return false
-         } else {
-            return true
-         }
-      },
-      checkPost4(){
-         if(this.post.Name.length === 0){
-            console.log(this.post.Name)
-            alert("der er ikke navn på post")
-            return false
-         }else{
-            return true
-         }
-      }
+    async GetAllPosts(url){
+        try{
+            response = await axios.get(url)
+            console.log(response.status, response)
+            this.ListofPosts = response.data
+            }
+            catch(error){
+            console.log(error)
+            }
+        },
+
+    connectRun(item){
+        this.selectedRun=item.id
+        console.log(this.selectedRun)
+        this.postfilter()
+    },
+
+    postfilter(){
+        this.FilteredList=""
+        this.FilteredList=this.ListofPosts.filter(x => x.runId===this.selectedRun)
+        this.FilteredList.sort((a,b) => {
+            return a.sequenceNumber - b.sequenceNumber
+        })
+        console.log(this.FilteredList)
+    }
    }
 }).mount("#app")

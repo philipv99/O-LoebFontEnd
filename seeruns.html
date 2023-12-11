@@ -29,20 +29,47 @@
 
 
     <section id="app">
-        <div class="container mt-4 w-75 mx-auto">
-            <h1>Liste af Løb</h1>        
-            <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll max-h">
-                <div class="bg-primary text-white p-2 mb-3 rounded-4 shadow">
-                    <div v-show="ListOfRuns.length >= 1" class="d-flex justify-content-between border-bottom mb-1 pb-1">
-                        <h4>Run Name:</h4>
-                        <h4>{{item.name}}</h4>
-                     </div>
-                     <div class="d-flex justify-content-between">
-                        <h5>Run type:</h5>
-                        <h5>{{item.runType}}</h5>
-                     </div>
-                    <div class="run-segments">
-                        <a class="read-more-button" href="/Intern/RequestsSpecific/131">Læs mere</a>
+        <div class="d-flex justify-content-between">
+            <div class="flex-column w-50">
+                <div class="container w-100">
+                    <div class="container mt-4 w-75 mx-auto">
+                        <h3>Liste af løb</h3>
+                        <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll max-h">
+                            <div v-for="item in ListofRuns" class="bg-primary text-white p-2 mb-3 rounded-4 shadow">
+                               <button v-on:click="connectRun(item)" class="border-0 bg-transparent text-white w-100">
+                                  <div v-show="ListofRuns.length >= 1" class="d-flex justify-content-between border-bottom mb-1 pb-1">
+                                     <h4>Løb Navn:</h4>
+                                     <h4>{{item.name}}</h4>
+                                  </div>
+                               </button>
+                            </div>
+                            <p v-if="ListofRuns.length <= 0" class="py-1 m-0">* kunne ikke load løb</p>
+                         </div>
+                    </div>
+                </div>
+                <div class="container w-100">
+                    <div class="container mt-4 w-75 mx-auto">
+                        <h3>Liste af poster</h3>
+                        <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll max-h">
+                            <div v-for="item in FilteredList" class="bg-primary text-white p-2 mb-3 rounded-4 shadow">
+                               <button class="border-0 bg-transparent text-white w-100">
+                                  <div v-show="ListofPosts.length >= 1" class="d-flex justify-content-between border-bottom mb-1 pb-1">
+                                     <h4>Post Navn:</h4>
+                                     <h4>{{item.name}}</h4>
+                                  </div>
+                               </button>
+                            </div>
+                            <p v-if="ListofPosts.length <= 0" class="py-1 m-0">* kunne ikke load løb</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" container w-50">
+                <div class="container mt-4 w-75 mx-auto">
+                    <h3>Kort af løb</h3>
+                    <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll max-h">
+                        <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
                     </div>
                 </div>
             </div>
