@@ -7,22 +7,53 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
    <link rel="stylesheet" href="style.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+   <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps.css" type="text/css">
+    <script typ="text/javascript" 
+        src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+<body>
+   <nav class=" bg-light">
+      <div class="container d-flex justify-content-between  flex-row fs-4">
+         <div class="w-50">
+            <a class="active text-decoration-none text-black" href="#O-Løb">O-Løb</a>
+         </div>
+         
+         <div class="w-75 d-flex justify-content-between">
+            <a href="./index.html">1.Opret løb</a>
+            <a href="./post.html">2.Opret post</a>
+            <a href="./quizquestions.html">3.Opret spørsmål</a>
+            <a href="./seeruns.html">Se løb</a>
+            <a href="./startrun.html">Start Løb</a>
+         </div>
+      </div>
+   </nav>
+
 
 <div id="app">
    <button v-on:click="toggle()">start</button>
 
    <h1>{{test}}</h1>
+   <div id="map" style="width:100vh;height:75vh"></div>
 
-   
-</div>
 
-<div id="demo">
-   <button-counter></button-counter>
-</div>
-   <script src="./startrunComp.js"></script>
    <script src="./startrun.js"></script>
+   <script type="text/javascript" id="my-map">
+      let center = []
+      const map = tt.map({
+          key: "vEdHLNMgoA1msNHdxlnxOW7fbO2vcDZC",
+          container: "map",
+          center: center,
+          zoom: 13
+      })
+      map.on('load', () => {
+          var marker = new tt.Marker().setLngLat(center).addTo(map);
+         
+      })
+  </script>
+</div>
+   <!-- <script src="./startrunComp.js"></script> -->
+   
 </body>
 </html>  

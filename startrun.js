@@ -3,14 +3,22 @@ const PostUrl = BaseUrl + "/api/Posts" // + "id"
 const RunsUrl = BaseUrl + "/api/Runs"
 
 
+ 
 Vue.createApp({
    data(){
       return{
          ToggleRun: false,
          test: 0.0,
+         x: 12.0780378,
+         y: 55.6310684
       }
    },
    async created(){
+      var mapElemet = document.getElementById("my-map");
+      var mapData = scriptElement.center || scriptElement.innerText;
+
+      scriptElement = [ 12.0780378,55.6310684]
+
 
    },
    methods: {
@@ -26,8 +34,9 @@ Vue.createApp({
             this.test += 0.100000
             await new Promise(r => setTimeout(r, 100));
          }
+      },
+      reX(){
+         return this.x
       }
    },
-   template:
-   ``
 }).mount("#app")

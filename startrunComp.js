@@ -18,13 +18,31 @@ appComp.component('button-counter', {
    </button>`
 })
 
-appComp.component('map', {
+appComp.component('my-map', {
    data(){
       return{
          
       }
    },
-   props: []
+   props: [],
+   created() {
+
+   },
+   template:`
+   <div id="map" style="width:100vh;height:75vh"></div>
+   
+   let center = [12.0780378, 55.6310684]
+   const map = tt.map({
+      key: "vEdHLNMgoA1msNHdxlnxOW7fbO2vcDZC",
+      container: "map",
+      center: center,
+      zoom: 13
+    })
+    map.on('load', () => {
+        var marker = new tt.Marker().setLngLat(center).addTo(map);
+       
+    })
+   `
 })
 
 appComp.mount("#demo")
