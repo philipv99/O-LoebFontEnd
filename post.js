@@ -9,7 +9,7 @@ Vue.createApp({
          selectedRunid: -1,
          indexOfList: 1,
          ListOfRuns: [],
-         addedPost:[],
+         addedPost: [],
          post:{
             Id: 0,
             Name: "",
@@ -29,7 +29,6 @@ Vue.createApp({
       catch(error){
          console.log(error)
       }
-      
    },
    methods:{
       async GetAllRuns(url){
@@ -55,8 +54,22 @@ Vue.createApp({
             }
             catch(error){
                console.log("Post: ", i ,error)
+               alert("!! der skete en fejl", error.message)
+               return
             }
-         }   
+         }  
+         this.addedPost = [];
+         this.post.Id = 0,
+         this.post.Name = "",
+         this.post.SequenceNumber = 0, 
+         this.post.Radius = 0,
+         this.post.GpsLatitude = 0,
+         this.post.GpsLongitude = 0,
+         this.post.RunId = 0,
+
+         this.selectedRunid = -1,
+         this.indexOfList = 1,
+         alert("Posterne blev tilføjet")
       },
       addPostToList(){
          if(!this.checkPost()){

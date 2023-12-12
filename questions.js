@@ -9,7 +9,7 @@ Vue.createApp({
       return{
          Question: {
             Id: 0,
-            QuestionToAnswer: "hej",
+            QuestionToAnswer: "",
             IsAnswered: false,
             PostId: -1
          },
@@ -64,15 +64,30 @@ Vue.createApp({
                if(i === this.AwnserId){
                   senditem.IsCorrectAnswer = true
                }
-
                try{
                   response = await axios.post(AwnsersUrl, senditem)
                   console.log("send test: ", response)
                }
                catch(error){
                   console.log(error)
+                  alert("!!Der skete en fejl: ", error.message)
+                  return
                }
             }
+            
+            this.tempAwnsers = ["","","",""],
+            this.Question.Id = 0,
+            this.Question.QuestionToAnswer ="",
+            this.Question.IsAnswered = false,
+            this.Question.PostId =-1
+            this.Awnsers.Id = 0,
+            this.Awnsers.AnswerToQuestion = "",
+            this.Awnsers.IsCorrectAnswer = false,
+            this.Awnsers.QuestionId = -1
+            this.AwnserId = 0,
+            this.Posts = []
+            this.ChosenPost = {}
+            alert("Spørgsmål og svar tilføjet")
          }
          catch (error){
             console.log(error)

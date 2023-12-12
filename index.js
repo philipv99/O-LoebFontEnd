@@ -24,44 +24,27 @@ Vue.createApp({
       };
    },
    methods: {
-      // async GetAll(Url){
-      //    try{
-      //       response = await axios.get(Url)
-      //       value = await response.data
-      //       console.log(value)
-      //       return value
-      //    }
-      //    catch (ex){
-      //       alert(ex.message)
-      //       console.log(Url, "did not respond")
-      //    }
-      // },
       async PoshNewRun(){
          try{
             response = await axios.post(PoshRunsUrl, this.RunToAdd).then(response => {console.log(response.status, response.data.token)})
             this.AddedRunSuccesMessege = "Løb blev tilføjet"
             this.RunToAdd.Name = ""
             this.RunToAdd.RunType = ""
+            console.log(document.location.pathname)
             alert("Run was added")
+            
+            var loc = window.location.pathname
+            var dir = loc.substring(0, loc.lastIndexOf('/'))
+            if(dir === undefined) {
+               window.location.href = document.location.origin + "/post.html"
+            } else {
+               window.location.href = document.location.origin + "/" + dir + "/post.html"
+            }
           }
          catch (ex) {
             alert(ex.message)
          }
       },
-      // addPost(object){
-      //    try {
-      //       this.addedPosts.push(object)
-      //       this.ListOfPosts.pop(object)
-      //       console.log(addedPosts)
-      //    } catch (error) {
-      //       console.log(error)
-      //    }
-      //    this.showAddPostForm = false
-      // },
-      // ButtenPress(){
-      //    this.showAddPostForm = !this.showAddPostForm 
-      //    console.log("show was pressed:", this.showAddPostForm)
-      // }
    }
 }).mount("#app")
 

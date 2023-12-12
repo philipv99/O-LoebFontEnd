@@ -102,7 +102,7 @@
                </Form>
             </div>
 
-            <div class="w-50">
+            <div class="w-50 d-flex flex-column">
                <h3>Poster Lavet</h3>
 
                <div class="w-100 max-h overflowY-scroll mt-4 bg-light px-3 pt-3 pb-1 rounded-4" >
@@ -130,19 +130,15 @@
                   </div>
                   <p v-if="addedPost.length < 1" class="p-0">*Du har ikke tilføjet nogen poster endnu</p>
                </div>
-
-            </div>     
+               <div class="d-flex justify-content-center p-1 mb-5 py-4">
+                  <button 
+                  v-on:click="PushPost()"
+                  class="btn btn-success btn-outline-light px-3 py-2 fw-bold fs-4 shadow w-75 mx-auto"
+                  >Tilføj poster til løb <i class="bi bi-send"></i></button>
+               </div>
+            </div>  
          </div>
-
-         <div class="container d-flex justify-content-center p-1 mb-5">
-            <button 
-            v-on:click="PushPost()"
-            class="btn btn-success btn-outline-light px-3 py-1 fw-bold fs-4 shadow w-50"
-            >Tilføj poster til løb</button>
-         </div>
-
       </main>
-
    </section>
 
 

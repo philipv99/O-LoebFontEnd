@@ -42,9 +42,31 @@
                      <option v-for="item in RunTypsList" v-bind:value="item">{{item}}</option>
                   </select>
             
-                  <button v-on:click="PoshNewRun()" class="btn btn-success shadow mb-4">Opret Run</button>
+                  <button v-on:click="PoshNewRun()" class="btn fs-3 btn-success shadow mb-4 border-1 border-white">Opret Run <i class="bi bi-send"></i></button>
                </form>
 
+         </div>
+         <div class="container my-5">
+            <div class="p-4 bg-info d-flex justify-content-evenly rounded-4 border-white border-1 border text-light shadow">
+               <div class="d-flex justify-content-around flex-column align-items-center hover-box">
+                  <h1 class="">Step 1.</h1>
+                  <i class="bi bi-map display-1"></i>
+                  <p class="fs-5 text-center">Start med at lave et løb</p>
+               </div>
+               <i class="bi bi-arrow-right my-auto display-2"></i>
+               <div class="d-flex justify-content-around flex-column align-items-center hover-box">
+                  <h1 class="">Step 2.</h1>
+                  <i class="bi bi-geo-alt display-1"></i>
+                  <p class="fs-5 text-center">Lav derefter poster til dit løb</p>
+               </div>
+               <i class="bi bi-arrow-right my-auto display-2"></i>
+               <div class="d-flex justify-content-around flex-column align-items-center hover-box">
+                  <h1 class="">Step 3.</h1>
+                  <i class="bi bi-list-ul display-1"></i>
+                  <p class="fs-5 text-center">Og til sidst stiller du <br> det spørgsmål du har brug for</p>
+               </div>
+
+            </div>
          </div>
          
       </div>
