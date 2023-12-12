@@ -85,8 +85,6 @@ Vue.createApp({
             this.Awnsers.IsCorrectAnswer = false,
             this.Awnsers.QuestionId = -1
             this.AwnserId = 0,
-            this.Posts = []
-            this.ChosenPost = {}
             alert("Spørgsmål og svar tilføjet")
          }
          catch (error){

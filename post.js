@@ -51,6 +51,15 @@ Vue.createApp({
             try{
                response = await axios.post(PostUrl, this.addedPost[i])
                console.log("Post respnse: ", i, this.addedPost[i], response)
+
+               var loc = window.location.pathname
+               var dir = loc.substring(0, loc.lastIndexOf('/'))
+               if(dir === undefined) {
+                  window.location.href = document.location.origin + "/quizquestions.html"
+               } else {
+                  window.location.href = document.location.origin + "/" + dir + "/quizquestions.html"
+               }
+               alert("Posterne blev tilføjet")
             }
             catch(error){
                console.log("Post: ", i ,error)
@@ -58,18 +67,7 @@ Vue.createApp({
                return
             }
          }  
-         this.addedPost = [];
-         this.post.Id = 0,
-         this.post.Name = "",
-         this.post.SequenceNumber = 0, 
-         this.post.Radius = 0,
-         this.post.GpsLatitude = 0,
-         this.post.GpsLongitude = 0,
-         this.post.RunId = 0,
-
-         this.selectedRunid = -1,
-         this.indexOfList = 1,
-         alert("Posterne blev tilføjet")
+         
       },
       addPostToList(){
          if(!this.checkPost()){
