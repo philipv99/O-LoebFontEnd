@@ -10,6 +10,7 @@ Vue.createApp({
          ListofRuns: [],
          ListofPosts: [],
          FilteredList: [],
+         map: {},
       };
    },
    async created(){
@@ -54,6 +55,14 @@ Vue.createApp({
             return a.sequenceNumber - b.sequenceNumber
         })
         console.log(this.FilteredList)
-    }
+    },
+
+    addmarker(map){
+        const filteredPost = this.ListofPosts.filter(x => x.runId===this.selectedRun)
+        filteredPost.forEach(p => {
+            new tt.Marker().setLngLat(p.gpsLongitude, p.gpsLatitude).addTo(map)
+            this.addmarker(map)
+        });
+    },
    }
 }).mount("#app")
