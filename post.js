@@ -10,6 +10,7 @@ Vue.createApp({
          indexOfList: 1,
          ListOfRuns: [],
          addedPost: [],
+         
          post:{
             Id: 0,
             Name: "",

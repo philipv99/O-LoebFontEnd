@@ -2,6 +2,7 @@ const BaseUrl = "https://o-loebrest20231128112940.azurewebsites.net"
 const PostUrl = BaseUrl + "/api/Posts" // + "id"
 const RunsUrl = BaseUrl + "/api/Runs"
 const QsUrl = BaseUrl + "/api/Questions"
+const AnwsersUrl = BaseUrl + "/api/Answer"
 
 
  
@@ -12,11 +13,18 @@ Vue.createApp({
          RunTime: 0.0,
          TotalAnswerd: 0,
          CorrectAnwers: 0,
+         playerLocation: [],
+         nextPost:{},
          selectedRun: -1,
+
          ListofRuns: [],
          ListofPosts: [],
-         FilteredList: [],
          ListOfQs: [],
+         ListOfAnswer: [],
+
+         FilteredList: [],
+         filteresQs: [],
+         filteresAnwsers: [],
       }
    },
    async created(){
@@ -40,19 +48,22 @@ Vue.createApp({
       async GetAllRuns(url){
          try{
             response = await axios.get(url)
-            console.log(response.status, response)
+            //console.log(response.status, response)
             this.ListofRuns = response.data
+            console.log("Runs ", this.ListofRuns.length, this.ListofRuns)
+            this.GetAllPosts(PostUrl)
             }
             catch(error){
             console.log(error)
          }
-         this.GetAllPosts(PostUrl)
       },
       async GetAllPosts(url){
          try{
             response = await axios.get(url)
-            console.log(response.status, response)
+            //console.log(response.status, response)
             this.ListofPosts = response.data
+            console.log("posts ", this.ListofPosts.length, this.ListofPosts)
+            this.GetAllQuestions()
          }
          catch(error){
             console.log(error)
@@ -61,8 +72,21 @@ Vue.createApp({
       async GetAllQuestions(){
          try{
             response = await axios.get(QsUrl)
-            console.log(response.status, response)
-            this.ListofPosts = response.data
+            //console.log(response.status, response)
+            this.ListOfQs = response.data
+            console.log("Qs ",this.ListOfQs.length, this.ListOfQs)
+            this.GetAllAnswer()
+         }
+         catch(error){
+            console.log(error)
+         }
+      },
+      async GetAllAnswer(){
+         try{
+            response = await axios.get(AnwsersUrl)
+            //console.log(response.status, response)
+            this.ListOfAnswer = response.data
+            console.log("Svard ",this.ListOfAnswer.length, this.ListOfAnswer)
          }
          catch(error){
             console.log(error)
@@ -77,10 +101,11 @@ Vue.createApp({
          this.selectedRun=item.id
          console.log(this.selectedRun)
          this.postfilter()
-         this.NextPost()
+         this.filterQs()
+         this.filterAnwsers()
       },
       NextPost(){
-         FilteredList.find(p => p.sequenceNumber === this.TotalAnswerd + 1)
+         //FilteredList.find(p => p.sequenceNumber === this.TotalAnswerd + 1)
       },
       postfilter(){
          this.FilteredList=""
