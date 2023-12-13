@@ -85,6 +85,8 @@ Vue.createApp({
                 
                 filteredPosts.forEach(post => {
                     new tt.Marker().setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+                    var popup = new tt.Popup().setHTML([post.sequenceNumber]);
+                    marker.setPopup(popup).togglePopup();
                 });
                 
             });
