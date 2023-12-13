@@ -38,22 +38,24 @@
    <div id="map" style="width:100vh;height:75vh"></div>
 
 
-   <script src="./startrun.js"></script>
-   <script type="text/javascript" id="my-map">
-      let center = []
-      const map = tt.map({
-          key: "vEdHLNMgoA1msNHdxlnxOW7fbO2vcDZC",
-          container: "map",
-          center: center,
-          zoom: 13
-      })
-      map.on('load', () => {
-          var marker = new tt.Marker().setLngLat(center).addTo(map);
-         
-      })
-  </script>
-</div>
-   <!-- <script src="./startrunComp.js"></script> -->
+  
    
+</div>
+
+
+<script type="text/javascript" id="my-map">
+   let center = []
+   const map = tt.map({
+       key: "vEdHLNMgoA1msNHdxlnxOW7fbO2vcDZC",
+       container: "map",
+       center: center,
+       zoom: 13
+   })
+   map.on('load', () => {
+       var marker = new tt.Marker().setLngLat(center).addTo(map);
+      
+   })
+</script>
+<script src="./startrun.js"></script>
 </body>
 </html>  

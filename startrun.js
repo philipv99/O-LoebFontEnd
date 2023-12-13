@@ -14,12 +14,6 @@ Vue.createApp({
       }
    },
    async created(){
-      var mapElemet = document.getElementById("my-map");
-      var mapData = scriptElement.center || scriptElement.innerText;
-
-      scriptElement = [ 12.0780378,55.6310684]
-
-
    },
    methods: {
       toggle(){
@@ -36,7 +30,7 @@ Vue.createApp({
          }
       },
       reX(){
-         return this.x
+         return [12.0780378, 55.6310684]
       }
    },
 }).mount("#app")
