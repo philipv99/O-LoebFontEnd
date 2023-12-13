@@ -1,6 +1,7 @@
 const BaseUrl = "https://o-loebrest20231128112940.azurewebsites.net"
 const PostUrl = BaseUrl + "/api/Posts" // + "id"
 const RunsUrl = BaseUrl + "/api/Runs"
+const QsUrl = BaseUrl + "/api/Questions"
 
 
  
@@ -8,11 +9,14 @@ Vue.createApp({
    data(){
       return{
          ToggleRun: false,
-         test: 0.0,
+         RunTime: 0.0,
+         TotalAnswerd: 0,
+         CorrectAnwers: 0,
          selectedRun: -1,
          ListofRuns: [],
          ListofPosts: [],
          FilteredList: [],
+         ListOfQs: [],
       }
    },
    async created(){
@@ -28,36 +32,55 @@ Vue.createApp({
       },
       async RunIson(){ // skal hente værd efter tintavald
          while(this.ToggleRun){
-            this.test += 0.100000
-            await new Promise(r => setTimeout(r, 100));
+            this.RunTime += 1
+            await new Promise(r => setTimeout(r, 1000));
          }
       },
 
       async GetAllRuns(url){
          try{
-             response = await axios.get(url)
-             console.log(response.status, response)
-             this.ListofRuns = response.data
-             }
-             catch(error){
-             console.log(error)
-             }
-             this.GetAllPosts(PostUrl)
-         },
+            response = await axios.get(url)
+            console.log(response.status, response)
+            this.ListofRuns = response.data
+            }
+            catch(error){
+            console.log(error)
+         }
+         this.GetAllPosts(PostUrl)
+      },
       async GetAllPosts(url){
          try{
             response = await axios.get(url)
             console.log(response.status, response)
             this.ListofPosts = response.data
-            }
-            catch(error){
+         }
+         catch(error){
             console.log(error)
-            }
-         },
+         }
+      },
+      async GetAllQuestions(){
+         try{
+            response = await axios.get(QsUrl)
+            console.log(response.status, response)
+            this.ListofPosts = response.data
+         }
+         catch(error){
+            console.log(error)
+         }
+      },
+      async Qs(){
+         FilteredList.forEach(p => {
+            
+         })
+      },
       connectRun(item){
          this.selectedRun=item.id
          console.log(this.selectedRun)
          this.postfilter()
+         this.NextPost()
+      },
+      NextPost(){
+         FilteredList.find(p => p.sequenceNumber === this.TotalAnswerd + 1)
       },
       postfilter(){
          this.FilteredList=""

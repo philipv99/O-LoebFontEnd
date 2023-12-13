@@ -66,6 +66,9 @@ input[type=radio]{
 .max-h{
   max-height: 40vh;
 }
+.max-h-lg{
+  max-height: 50vh;
+}
 
 body{
   background-image: url(https://images.pexels.com/photos/340932/pexels-photo-340932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);

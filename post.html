@@ -82,7 +82,7 @@
                      <input v-model="post.Name" type="text" placeholder="Navn" class="mb-3">
                      <label for="Name">Radius</label>
                      <input v-model.number="post.Radius" type="number" placeholder="Radius" class="mb-3">
-                     <div class="d-flex justify-content-evenly mb-3">
+                     <div class="d-flex justify-content-evenly flex-row-reverse mb-3">
                         <div class="d-flex flex-column align-items-lg-center">
                            <label for="Breddegrad">Brede grad (-180 - 180)</label>
                            <span class="d-flex justify-content-center">
@@ -115,7 +115,7 @@
                         <h4>Nr: {{item.SequenceNumber}}</h4>
                      </div>
                      <div class="container">
-                        <div class="d-flex justify-content-between mb-1">
+                        <div class="d-flex justify-content-between flex-row-reverse mb-1">
                            <div>
                               <span><i class="bi bi-arrows fs-4"></i> Breddegrad: {{item.GpsLatitude}}</span>
                            </div>
