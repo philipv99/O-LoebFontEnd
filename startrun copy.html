@@ -32,32 +32,41 @@
 
 
 <div id="app">
-   <!-- <button v-on:click="toggle()">start</button> -->
-   <div class="w-50">
-      <h3>Liste af løb</h3>
-      <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll max-h">
-         <div v-for="item in ListofRuns" class="bg-primary text-white p-2 mb-3 rounded-4 shadow">
-         <button v-on:click="connectRun(item); initializeMap()" class="border-0 bg-transparent text-white w-100">
-            <div v-show="ListofRuns.length >= 1" class="d-flex justify-content-between border-bottom mb-1 pb-1">
-               <h4>Løb Navn:</h4>
-               <h4>{{item.name}}</h4>
-            </div>
-         </button>
-         </div>
-         <p v-if="ListofRuns.length <= 0" class="py-1 m-0">* kunne ikke load løb</p>
-      </div>
-   </div>
-   
 
-   <div class=" container w-50">
-      <div class="container mt-4 w-75 mx-auto">
-          <h3>Kort af løb</h3>
-          <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll">
-              <div id="map" class="map" style="width:100vh;height:75vh"></div>
-          </div>
+   <div class="row g-0">
+      <div class="col-6 p-3">
+         <h2>Vælg løb</h2>
+         <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll max-h fliped">
+            <div v-for="item in ListofRuns" class="bg-primary text-white p-2 mb-3 rounded-4 shadow">
+            <button v-on:click="connectRun(item); initializeMap()" class="border-0 bg-transparent text-white w-100">
+                <div v-show="ListofRuns.length >= 1" class="d-flex justify-content-between border-bottom mb-1 pb-1">
+                    <h4>Løb Navn:</h4>
+                    <h4>{{item.name}}</h4>
+                </div>
+            </button>
+            </div>
+            <p v-if="ListofRuns.length <= 0" class="py-1 m-0">* kunne ikke load løb</p>
+        </div>
+      </div>
+      <div class="col-6 py-3">
+         <h3>SKort over poster</h3>
+         <div class="container-fluid bg-light p-3 rounded-3 overflowY-scroll">
+            <div id="map" class="map" style="width:100%;height:40vh"></div>
+        </div>
       </div>
    </div>
-   
+   <div class="row g-0">
+      <div class="col-6 p-3">
+         <h3>spørsmål</h3>
+         <div class="p-2 bg-light rounded-4 my-3 d-flex justify-content-center">
+            <h4 class="my-3">!Gå til punkt!</>
+         </div>
+      </div>
+      <div class="col-6 p-3">
+         <h3>Poster</h3>
+      </div>
+   </div>
+ 
 </div>
 
 <script src="./startrun.js"></script>

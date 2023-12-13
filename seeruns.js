@@ -59,7 +59,7 @@ Vue.createApp({
             const filteredPosts = this.ListofPosts.filter(x => x.runId === this.selectedRun);
 
             
-            let centerPoint = [55.6310684, 12.0780378]; // Default set to Roskilde
+            let centerPoint = [ 12.0780378, 55.6310684]; // Default set to Roskilde
 
             for (const p of filteredPosts) {
                 if (p.sequenceNumber === 1) {
