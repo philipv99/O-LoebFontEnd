@@ -92,3 +92,10 @@ body{
 .fliped{
   transform: scaleX(-1);
 }
+
+.marker-border{
+  background: #474747;
+  border-radius: 40%;
+  width: 55px;
+  height: 55px;
+}
