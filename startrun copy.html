@@ -60,8 +60,22 @@
    <div class="row g-0">
       <div class="col-6 pe-2 py-2">
          <h3>spørsmål</h3>
-         <div class="p-2 bg-light rounded my-3 d-flex justify-content-center">
-            <h4 class="my-3">!Gå til punkt!</>
+         <div class="w-100 d-flex justify-content-between text-white fs-6">
+            <span>Post: {{nextPost.name}}</span>
+            <span>Post Nr: {{nextPost.sequenceNumber}}</span>
+            <div>
+               <button v-on:click="" class="btn btn-primary rounded-circle"><</button>
+               <button class="btn btn-primary rounded-circle">></button>
+            </div>
+         </div>
+         <div v-for="TotalQ in FilteresAnwsers" class="p-2 bg-light rounded my-3 d-flex justify-content-center d-flex flex-column">
+            <h5>{{TotalQ.Q.questionToAnswer}}</h5> 
+            <div v-for="A in TotalQ.AnswerSet">
+               <div class="d-flex border-1 border-bottom border-dark border-opacity-10 p-2">
+                  <input class="form-check-input m-0" type="radio" v-bind:name="TotalQ.Q.id" v-bind:value="TotalQ.Q.id">
+                  <p class="m-0 fs-5 ps-3" >{{A.answerToQuestion}}</p>
+               </div>
+            </div>
          </div>
       </div>
       <div class="col-6 ps-2 py-2">

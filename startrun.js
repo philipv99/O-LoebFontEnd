@@ -13,8 +13,10 @@ Vue.createApp({
          RunTime: 0.0,
          TotalAnswerd: 0,
          CorrectAnwers: 0,
-         playerLocation: [],
-         nextPost:{},
+         playerLocation: [], // id hent fra 1 ALTID !!!
+         postCount: 0,
+         QCount: 0,
+         nextPost: {},
          selectedRun: -1,
 
          ListofRuns: [],
@@ -23,8 +25,8 @@ Vue.createApp({
          ListOfAnswer: [],
 
          FilteredList: [],
-         filteresQs: [],
-         filteresAnwsers: [],
+         FilteresQs: [],
+         FilteresAnwsers: [],
       }
    },
    async created(){
@@ -86,26 +88,25 @@ Vue.createApp({
             response = await axios.get(AnwsersUrl)
             //console.log(response.status, response)
             this.ListOfAnswer = response.data
-            console.log("Svard ",this.ListOfAnswer.length, this.ListOfAnswer)
+            //console.log("Svard ",this.ListOfAnswer.length, this.ListOfAnswer)
          }
          catch(error){
             console.log(error)
          }
       },
-      async Qs(){
-         FilteredList.forEach(p => {
-            
-         })
-      },
       connectRun(item){
          this.selectedRun=item.id
          console.log(this.selectedRun)
+        
          this.postfilter()
-         this.filterQs()
-         this.filterAnwsers()
+         this.NextPost() 
+      },
+      chooseQ(){
+
       },
       NextPost(){
-         //FilteredList.find(p => p.sequenceNumber === this.TotalAnswerd + 1)
+         this.nextPost = this.FilteredList[this.postCount]
+         this.filterQs()
       },
       postfilter(){
          this.FilteredList=""
@@ -113,7 +114,48 @@ Vue.createApp({
          this.FilteredList.sort((a,b) => {
                return a.sequenceNumber - b.sequenceNumber
          })
-         console.log(this.FilteredList)
+         console.log("filters posts: ",this.FilteredList)
+      },
+      filterQs(){
+         if(this.FilteredList.length < 1){
+            this.nextPost = null
+            console.log("poster er null")
+            return
+         }
+         else{
+            console.log("post til at finde ", this.nextPost)
+            this.FilteresQs = []
+            this.FilteresQs = this.ListOfQs.filter(x => x.postId === this.nextPost.id)
+            console.log("Qs filterd: ",this.FilteresQs)  
+            this.filterAnwsersTest()
+         } 
+      },
+      filterAnwsers(){
+         if(this.FilteresQs.length > 0){
+            this.FilteresAnwsers = []
+            this.FilteresAnwsers = this.ListOfAnswer.filter(x => x.QuestionId === this.FilteresQs[this.QCount].id)
+            console.log("Answers filtered: ",this.FilteresAnwsers)
+         }
+         else{
+            console.log("der er ingen spørgsmål")
+            return
+         }
+      },
+
+      filterAnwsersTest(){
+         this.FilteresAnwsers = []
+         this.FilteresQs.forEach(Q => {
+            AnswerSet = []
+            this.ListOfAnswer.forEach(A => {
+               if(A.questionId === Q.id){
+                  AnswerSet.push(A)
+               }
+            })
+            if(AnswerSet.length > 0){
+               this.FilteresAnwsers.push({Q, AnswerSet})
+            }
+         })
+         console.log("test tilter: " ,this.FilteresAnwsers)
       },
 
 
@@ -132,7 +174,7 @@ Vue.createApp({
 
          let center = centerPoint;
 
-         console.log("Center location" + center)
+         //console.log("Center location" + center)
 
          map = tt.map({
              key: "vEdHLNMgoA1msNHdxlnxOW7fbO2vcDZC",
