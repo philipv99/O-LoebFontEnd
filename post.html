@@ -37,17 +37,19 @@
             <div class="w-50">
                <h3>Vælg løb</h3>
                <div class="mb-4 container-fluid bg-light p-3 rounded-3 overflowY-scroll max-h">
-                  <div v-for="item in ListOfRuns" class="bg-primary text-white p-2 mb-3 rounded-4 shadow">
-                     <button v-on:click="connectRun(item)" class="border-0 bg-transparent text-white w-100">
-                        <div v-show="ListOfRuns.length >= 1" class="d-flex justify-content-between border-bottom mb-1 pb-1">
-                           <h4>Run Name:</h4>
-                           <h4>{{item.name}}</h4>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                           <h5>Run type:</h5>
-                           <h5>{{item.runType}}</h5>
-                        </div>
-                     </button>
+                  <div v-if="ListOfRuns.length > 0">
+                     <div v-for="item in ListOfRuns" class="bg-primary text-white p-2 mb-3 rounded-4 shadow">
+                        <button v-on:click="connectRun(item)" class="border-0 bg-transparent text-white w-100">
+                           <div v-show="ListOfRuns.length >= 1" class="d-flex justify-content-between border-bottom mb-1 pb-1">
+                              <h4>Run Name:</h4>
+                              <h4>{{item.name}}</h4>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                              <h5>Run type:</h5>
+                              <h5>{{item.runType}}</h5>
+                           </div>
+                        </button>
+                     </div>
                   </div>
                   <p v-if="ListOfRuns.length <= 0" class="py-1 m-0">* kunne ikke load løb</p>
                </div>
