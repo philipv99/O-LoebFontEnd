@@ -62,10 +62,10 @@
          <h3>spørsmål</h3>
          <div class="w-100 d-flex justify-content-between text-white fs-6">
             <span>Post: {{nextPost.name}}</span>
-            <span>Post Nr: {{nextPost.sequenceNumber}}</span>
+            <span>Post Nr: {{postCount + 1}}</span>
             <div>
-               <button v-on:click="" class="btn btn-primary rounded-circle"><</button>
-               <button class="btn btn-primary rounded-circle">></button>
+               <button v-on:click="PostUpDown(0)" class="btn btn-primary rounded-circle"><</button>
+               <button v-on:click="PostUpDown(1)" class="btn btn-primary rounded-circle">></button>
             </div>
          </div>
          <div v-for="TotalQ in FilteresAnwsers" class="p-2 bg-light rounded my-3 d-flex justify-content-center d-flex flex-column">

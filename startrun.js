@@ -97,7 +97,7 @@ Vue.createApp({
       connectRun(item){
          this.selectedRun=item.id
          console.log(this.selectedRun)
-        
+         this.postCount = 0   
          this.postfilter()
          this.NextPost() 
       },
@@ -108,6 +108,23 @@ Vue.createApp({
          this.nextPost = this.FilteredList[this.postCount]
          this.filterQs()
       },
+      PostUpDown(up){
+         if(up === 1 && this.postCount < this.FilteredList.length){
+            try{
+               this.FilteredList[this.postCount++]
+               this.NextPost()
+            }
+            catch(error){
+               console.log(error)
+            }
+         }
+         if(up === 0 && this.postCount > 0){
+            this.postCount--
+            this.NextPost()
+         }
+         console.log(this.postCount)
+      },
+
       postfilter(){
          this.FilteredList=""
          this.FilteredList=this.ListofPosts.filter(x => x.runId===this.selectedRun)
@@ -130,18 +147,6 @@ Vue.createApp({
             this.filterAnwsersTest()
          } 
       },
-      filterAnwsers(){
-         if(this.FilteresQs.length > 0){
-            this.FilteresAnwsers = []
-            this.FilteresAnwsers = this.ListOfAnswer.filter(x => x.QuestionId === this.FilteresQs[this.QCount].id)
-            console.log("Answers filtered: ",this.FilteresAnwsers)
-         }
-         else{
-            console.log("der er ingen spørgsmål")
-            return
-         }
-      },
-
       filterAnwsersTest(){
          this.FilteresAnwsers = []
          this.FilteresQs.forEach(Q => {
