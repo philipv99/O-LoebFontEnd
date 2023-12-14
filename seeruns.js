@@ -80,15 +80,29 @@ Vue.createApp({
                 center: center,
                 zoom: 10,
             });
+
+            
+
             map.on("load", () => {
-                
-                
                 filteredPosts.forEach(post => {
-                    new tt.Marker().setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
-                    var popup = new tt.Popup().setHTML([post.sequenceNumber]);
+                    let div = document.createElement('div')
+                    div.innerHTML = [post.sequenceNumber]
+
+                    let border = document.createElement('div')
+                    border.className = 'marker-border'
+
+                    let popup = new tt.Popup({
+                        closeButton: false,
+                        closeOnClick: false,
+                        togglePopup: false,
+                    }).setDOMContent(div);
+                    
+                    let marker = new tt.Marker({
+                        element: border
+                    }).LngLat = setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+                        
                     marker.setPopup(popup).togglePopup();
                 });
-                
             });
         },
     },
