@@ -1,4 +1,4 @@
-const BaseUrl = "http://localhost:5189" //"https://o-loebrest20231128112940.azurewebsites.net"
+const BaseUrl = "https://o-loebrest20231128112940.azurewebsites.net" //"http://localhost:5189" 
 const PostUrl = BaseUrl + "/api/Posts" // + "id"
 const RunsUrl = BaseUrl + "/api/Runs"
 const QsUrl = BaseUrl + "/api/Questions"
@@ -43,7 +43,7 @@ Vue.createApp({
          if(this.ToggleRun){
             this.getPayerLocation()
             this.RunIson()
-            this.initializeMap()
+            //this.initializeMap()
          }
       },
       async RunIson(){
