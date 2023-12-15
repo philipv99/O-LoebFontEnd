@@ -59,7 +59,7 @@ Vue.createApp({
             const filteredPosts = this.ListofPosts.filter(x => x.runId === this.selectedRun);
 
             
-            let centerPoint = [ 12.0780378, 55.6310684]; // Default set to Roskilde
+            // let centerPoint = [ 12.0780378, 55.6310684]; // Default set to Roskilde
 
             for (const p of filteredPosts) {
                 if (p.sequenceNumber === 1) {
@@ -69,10 +69,6 @@ Vue.createApp({
             }
 
             let center = centerPoint;
-            
-            
-            
-            console.log("Center location" + center)
 
             map = tt.map({
                 key: "vEdHLNMgoA1msNHdxlnxOW7fbO2vcDZC",

@@ -205,7 +205,7 @@ Vue.createApp({
          const filteredPosts = this.ListofPosts.filter(x => x.runId === this.selectedRun);
 
          
-         let centerPoint = [55.6310684, 12.0780378]; // Default set to Roskilde
+         let centerPoint = [ 12.0780378, 55.6310684]; // Default set to Roskilde
 
          // for (const p of filteredPosts) {
          //     if (p.sequenceNumber === 1) {
@@ -226,9 +226,24 @@ Vue.createApp({
              zoom: 10,
          });
          map.on("load", () => {
-            //new tt.Marker().setLngLat([this.playerLocation[0], this.playerLocation[1]]).addTo(map);
             filteredPosts.forEach(post => {
-               new tt.Marker().setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+               let div = document.createElement('div')
+               div.innerHTML = [post.sequenceNumber]
+
+               let border = document.createElement('div')
+               border.className = 'marker-border'
+
+               let popup = new tt.Popup({
+                  closeButton: false,
+                  closeOnClick: false,
+                  togglePopup: false,
+               }).setDOMContent(div);
+
+               let marker = new tt.Marker({
+                  element: border
+              }).setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+
+              marker.setPopup(popup).togglePopup();
             });
          });
      },
