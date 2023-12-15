@@ -80,9 +80,7 @@ Vue.createApp({
                 center: center,
                 zoom: 10,
             });
-
             
-
             map.on("load", () => {
                 filteredPosts.forEach(post => {
                     let div = document.createElement('div')
@@ -99,7 +97,7 @@ Vue.createApp({
                     
                     let marker = new tt.Marker({
                         element: border
-                    }).LngLat = setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+                    }).setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
                         
                     marker.setPopup(popup).togglePopup();
                 });
