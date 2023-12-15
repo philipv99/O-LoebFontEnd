@@ -48,27 +48,29 @@ Vue.createApp({
          console.log(this.selectedRunid)
       },
       async PushPost(){
+         wasSend = true
          for(let i = 0; i < this.addedPost.length; i++){
             try{
                response = await axios.post(PostUrl, this.addedPost[i])
                console.log("Post respnse: ", i, this.addedPost[i], response)
-
-               var loc = window.location.pathname
-               var dir = loc.substring(0, loc.lastIndexOf('/'))
-               if(dir === undefined) {
-                  window.location.href = document.location.origin + "/quizquestions.html"
-               } else {
-                  window.location.href = document.location.origin + "/" + dir + "/quizquestions.html"
-               }
-               alert("Posterne blev tilføjet")
             }
             catch(error){
+               wasSend = false
                console.log("Post: ", i ,error)
                alert("!! der skete en fejl", error.message)
                return
             }
          }  
-         
+         if(wasSend){
+            alert("Posterne blev tilføjet, du bliver nu sendt videre >>")
+            var loc = window.location.pathname
+            var dir = loc.substring(0, loc.lastIndexOf('/'))
+            if(dir === undefined) {
+               window.location.href = document.location.origin + "/quizquestions.html"
+            } else {
+               window.location.href = document.location.origin + "/" + dir + "/quizquestions.html"
+            }
+         } 
       },
       addPostToList(){
          if(!this.checkPost()){
