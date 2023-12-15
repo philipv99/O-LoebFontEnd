@@ -99,3 +99,7 @@ body{
   width: 55px;
   height: 55px;
 }
+
+.live-marker {
+  background-color: red;
+}
