@@ -173,22 +173,25 @@ Vue.createApp({
          i = 0.00
          while(this.ToggleRun){
             try {
-               //response = await axios.get(playerURL)
-               //this.playerLocation = [response.data.longitude, response.data.latitude]
+               response = await axios.get(playerURL)
+               this.playerLocation = [response.data.latitude, response.data.longitude]
+               console.log(response)
 
-               response = [12.078352 + i, 55.6307763 + i]
-               i = i + 0.5
-               console.log("R", response[0], response[1])
-               console.log("P", this.playerLocation[0], this.playerLocation[1])
-               if (response[0] !== this.playerLocation[0]){
-                  this.playerLocation = [response[0], response[1]]
-                  console.log("map was upsated")
-               }
-               else if(response[1] !== this.playerLocation[1]){
-                  this.playerLocation = [response[0], response[1]]
-                  console.log("map was upsated")
-               }
-               playerPoint = new tt.Marker().setLngLat([this.playerLocation[0], this.playerLocation[1]]).addTo(map);
+              // response = [12.078352 + i, 55.6307763 + i]
+              // i = i + 0.5
+              // console.log("R", response[0], response[1])
+              // console.log("P", this.playerLocation[0], this.playerLocation[1])
+              // if (response[0] !== this.playerLocation[0]){
+                 // this.playerLocation = [response[0], response[1]]
+                //  console.log("map was upsated")
+              // }
+              // else if(response[1] !== this.playerLocation[1]){
+                 // this.playerLocation = [response[0], response[1]]
+                //  console.log("map was upsated")
+              // }
+               playerPoint = new tt.Marker().setLngLat([this.playerLocation[1], this.playerLocation[0]]).addTo(map);
+               console.log("Location1: " + this.playerLocation[0])
+               console.log("Location1: " + this.playerLocation[1])
             }
             catch (error){
                console.log(error.message)
