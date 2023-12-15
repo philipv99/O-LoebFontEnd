@@ -169,37 +169,59 @@ Vue.createApp({
          console.log("test tilter: " ,this.FilteresAnwsers)
       },
 
-      async getPayerLocation(){
-         i = 0.00
-         while(this.ToggleRun){
-            try {
-               response = await axios.get(playerURL)
-               this.playerLocation = [response.data.latitude, response.data.longitude]
-               console.log(response)
-
-              // response = [12.078352 + i, 55.6307763 + i]
-              // i = i + 0.5
-              // console.log("R", response[0], response[1])
-              // console.log("P", this.playerLocation[0], this.playerLocation[1])
-              // if (response[0] !== this.playerLocation[0]){
-                 // this.playerLocation = [response[0], response[1]]
-                //  console.log("map was upsated")
-              // }
-              // else if(response[1] !== this.playerLocation[1]){
-                 // this.playerLocation = [response[0], response[1]]
-                //  console.log("map was upsated")
-              // }
-               playerPoint = new tt.Marker().setLngLat([this.playerLocation[1], this.playerLocation[0]]).addTo(map);
-               console.log("Location1: " + this.playerLocation[0])
-               console.log("Location1: " + this.playerLocation[1])
-            }
-            catch (error){
-               console.log(error.message)
-            }
-            await new Promise(r => setTimeout(r, 5000));
-            //console.log(this.playerLocation[0], this.playerLocation[1])
+      async getPayerLocation() {
+         let playerPointStart = null; // Declare playerPointStart outside the loop
+         let playerPointMove = null; // Declare playerPointMove outside the loop
+       
+         while (this.ToggleRun) {
+           try {
+             const response = await axios.get(playerURL);
+             this.playerLocation = [response.data.latitude, response.data.longitude];
+       
+             if (!playerPointStart) {
+               // Create a new start marker if it doesn't exist
+               const customMarkerElementStart = document.createElement('div');
+               customMarkerElementStart.className = 'custom-marker-start';
+               customMarkerElementStart.style.width = '20px';
+               customMarkerElementStart.style.height = '20px';
+               customMarkerElementStart.style.borderRadius = '50%';
+               customMarkerElementStart.style.backgroundColor = 'red';
+       
+               playerPointStart = new tt.Marker({ element: customMarkerElementStart })
+                 .setLngLat([this.playerLocation[1], this.playerLocation[0]])
+                 .addTo(map);
+             }
+       
+             if (!playerPointMove) {
+               // Create a new move marker if it doesn't exist
+               const customMarkerElementMove = document.createElement('div');
+               customMarkerElementMove.className = 'custom-marker-move';
+               customMarkerElementMove.style.width = '20px';
+               customMarkerElementMove.style.height = '20px';
+               customMarkerElementMove.style.borderRadius = '50%';
+               customMarkerElementMove.style.backgroundColor = 'blue';
+       
+               playerPointMove = new tt.Marker({ element: customMarkerElementMove })
+                 .setLngLat([this.playerLocation[1], this.playerLocation[0]])
+                 .addTo(map);
+             } else {
+               // Update the move marker's position if it exists
+               playerPointMove.setLngLat([this.playerLocation[1], this.playerLocation[0]]);
+             }
+       
+             setTimeout(() => {
+               // Remove the move marker after 5 seconds
+               map.removeLayer(playerPointMove);
+             }, 5000);
+           } catch (error) {
+             console.log(error.message);
+           }
+       
+           // await new Promise(r => setTimeout(r, 5000));
+           // console.log(this.playerLocation[0], this.playerLocation[1])
          }
-      },
+       },
+       
 
       initializeMap() {
          const filteredPosts = this.ListofPosts.filter(x => x.runId === this.selectedRun);
