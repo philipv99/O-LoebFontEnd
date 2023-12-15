@@ -81,11 +81,11 @@
                   <p class="m-0 fs-5 ps-3" >{{A.answerToQuestion}}</p>
                </div>
             </div>
-            <button 
+            <button
             class="w-50 mx-auto btn btn-primary text-white mt-1"
             :class="TotalQ.Q.isAnswered ? 'disabled' : 'nothing'"
             :disabled="TotalQ.Q.isAnswered"
-            v-bind:name="TotalQ.Q.id" 
+            v-bind:name="TotalQ.Q.id"
             v-on:click="TotalQ.Q.isAnswered = true"
             >Svard</button>
          </div>
