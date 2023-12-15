@@ -1,8 +1,9 @@
-const BaseUrl = "https://o-loebrest20231128112940.azurewebsites.net"
+const BaseUrl = "http://localhost:5189" //"https://o-loebrest20231128112940.azurewebsites.net"
 const PostUrl = BaseUrl + "/api/Posts" // + "id"
 const RunsUrl = BaseUrl + "/api/Runs"
 const QsUrl = BaseUrl + "/api/Questions"
 const AnwsersUrl = BaseUrl + "/api/Answer"
+const playerURL = BaseUrl + "/api/GPSLocation/1"
 
 
  
@@ -10,10 +11,11 @@ Vue.createApp({
    data(){
       return{
          ToggleRun: false,
+         buttonText: "Start",
          RunTime: 0.0,
          TotalAnswerd: 0,
          CorrectAnwers: 0,
-         playerLocation: [], // id hent fra 1 ALTID !!!
+         playerLocation: [12.078352, 55.6307763], // id hent fra id 1 ALTID
          postCount: 0,
          QCount: 0,
          nextPost: {},
@@ -34,13 +36,17 @@ Vue.createApp({
    },
    methods: {
       toggle(){ // til at starte 5 sek intavaller
+         if( this.buttonText === "Start" ){ this.buttonText = "Stop" }
+         else{ this.buttonText = "Start" }
          this.ToggleRun = !this.ToggleRun
          console.log(this.ToggleRun)
          if(this.ToggleRun){
+            this.getPayerLocation()
             this.RunIson()
+            this.initializeMap()
          }
       },
-      async RunIson(){ // skal hente værd efter tintavald
+      async RunIson(){
          while(this.ToggleRun){
             this.RunTime += 1
             await new Promise(r => setTimeout(r, 1000));
@@ -163,6 +169,34 @@ Vue.createApp({
          console.log("test tilter: " ,this.FilteresAnwsers)
       },
 
+      async getPayerLocation(){
+         i = 0.00
+         while(this.ToggleRun){
+            try {
+               //response = await axios.get(playerURL)
+               //this.playerLocation = [response.data.longitude, response.data.latitude]
+
+               response = [12.078352 + i, 55.6307763 + i]
+               i = i + 0.5
+               console.log("R", response[0], response[1])
+               console.log("P", this.playerLocation[0], this.playerLocation[1])
+               if (response[0] !== this.playerLocation[0]){
+                  this.playerLocation = [response[0], response[1]]
+                  console.log("map was upsated")
+               }
+               else if(response[1] !== this.playerLocation[1]){
+                  this.playerLocation = [response[0], response[1]]
+                  console.log("map was upsated")
+               }
+               playerPoint = new tt.Marker().setLngLat([this.playerLocation[0], this.playerLocation[1]]).addTo(map);
+            }
+            catch (error){
+               console.log(error.message)
+            }
+            await new Promise(r => setTimeout(r, 5000));
+            //console.log(this.playerLocation[0], this.playerLocation[1])
+         }
+      },
 
       initializeMap() {
          const filteredPosts = this.ListofPosts.filter(x => x.runId === this.selectedRun);
@@ -170,12 +204,13 @@ Vue.createApp({
          
          let centerPoint = [55.6310684, 12.0780378]; // Default set to Roskilde
 
-         for (const p of filteredPosts) {
-             if (p.sequenceNumber === 1) {
-                 centerPoint = [p.gpsLongitude, p.gpsLatitude];
-                 break; // Exit the loop once a center with sequence number 1 is found
-             }
-         }
+         // for (const p of filteredPosts) {
+         //     if (p.sequenceNumber === 1) {
+         //         centerPoint = [p.gpsLongitude, p.gpsLatitude];
+         //         break; // Exit the loop once a center with sequence number 1 is found
+         //     }
+         // }
+         centerPoint = [this.playerLocation[0], this.playerLocation[1]];
 
          let center = centerPoint;
 
@@ -188,10 +223,10 @@ Vue.createApp({
              zoom: 10,
          });
          map.on("load", () => {
-  
-             filteredPosts.forEach(post => {
-                 new tt.Marker().setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
-             });
+            //new tt.Marker().setLngLat([this.playerLocation[0], this.playerLocation[1]]).addTo(map);
+            filteredPosts.forEach(post => {
+               new tt.Marker().setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+            });
          });
      },
    },

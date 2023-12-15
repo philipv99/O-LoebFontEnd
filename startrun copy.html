@@ -69,13 +69,25 @@
             </div>
          </div>
          <div v-for="TotalQ in FilteresAnwsers" class="p-2 bg-light rounded my-3 d-flex justify-content-center d-flex flex-column">
-            <h5>{{TotalQ.Q.questionToAnswer}}</h5> 
+            <h5>{{TotalQ.Q.questionToAnswer}}</h5>
             <div v-for="A in TotalQ.AnswerSet">
-               <div class="d-flex border-1 border-bottom border-dark border-opacity-10 p-2">
-                  <input class="form-check-input m-0" type="radio" v-bind:name="TotalQ.Q.id" v-bind:value="TotalQ.Q.id">
+               <div class="d-flex border-1 border-bottom border-dark border-opacity-10 p-2"
+               :class="A.isCorrectAnswer && TotalQ.Q.isAnswered ? 'bg-success' : 'bg-transparent'">
+                  <input class="form-check-input m-0" 
+                  type="radio" v-bind:name="TotalQ.Q.id" 
+                  v-bind:value="TotalQ.Q.id"
+                  :class="TotalQ.Q.isAnswered ? 'disabled' : 'nothing'"
+                  :disabled="TotalQ.Q.isAnswered">
                   <p class="m-0 fs-5 ps-3" >{{A.answerToQuestion}}</p>
                </div>
             </div>
+            <button 
+            class="w-50 mx-auto btn btn-primary text-white mt-1"
+            :class="TotalQ.Q.isAnswered ? 'disabled' : 'nothing'"
+            :disabled="TotalQ.Q.isAnswered"
+            v-bind:name="TotalQ.Q.id" 
+            v-on:click="TotalQ.Q.isAnswered = true"
+            >Svard</button>
          </div>
       </div>
       <div class="col-6 ps-2 py-2">
@@ -84,8 +96,11 @@
             <h5>Tid: {{RunTime}} sekunder</h5>
             <h5>Spørgsmål svarget: {{TotalAnswerd}} / {{FilteredList.length}} </h5>
             <button v-on:click="toggle()"
-            class="btn btn-success btn-outline-light px-2 py-1 fw-semibold fs-3 shadow w-50 mx-auto bottom-100">
-               Start løb <i class="bi bi-play-fill"></i>
+            class="btn btn-success btn-outline-light px-2 py-1 fw-semibold fs-3 shadow w-50 mx-auto bottom-100"
+            :class="ToggleRun ? 'bg-warning' : 'bg-success'"
+            >{{ buttonText }}
+               <i v-if="!ToggleRun" class="bi bi-play-fill"></i>
+               <i v-if="ToggleRun" class="bi bi-pause-fill"></i>
             </button>
          </div>
       </div>
