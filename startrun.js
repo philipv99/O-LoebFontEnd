@@ -263,7 +263,7 @@ Vue.createApp({
 
                let marker = new tt.Marker({
                   element: border
-              }).setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+              }).setLngLat([post.gpsLatitude, post.gpsLongitude]).addTo(map);
 
               marker.setPopup(popup).togglePopup();
             });

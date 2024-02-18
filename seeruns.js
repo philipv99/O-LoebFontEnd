@@ -63,7 +63,7 @@ Vue.createApp({
 
             for (const p of filteredPosts) {
                 if (p.sequenceNumber === 1) {
-                    centerPoint = [p.gpsLongitude, p.gpsLatitude];
+                    centerPoint = [p.gpsLatitude, p.gpsLongitude];
                     break; // Exit the loop once a center with sequence number 1 is found
                 }
             }
@@ -93,7 +93,7 @@ Vue.createApp({
                     
                     let marker = new tt.Marker({
                         element: border
-                    }).setLngLat([post.gpsLongitude, post.gpsLatitude]).addTo(map);
+                    }).setLngLat([post.gpsLatitude, post.gpsLongitude]).addTo(map);
                         
                     marker.setPopup(popup).togglePopup();
                 });

@@ -3,6 +3,8 @@ const QuestionsUrl = BaseUrl + "/api/Questions"
 const AwnsersUrl = BaseUrl + "/api/Answer"
 const PostUrl = BaseUrl + "/api/Posts" // + "id"
 
+const RandomQuestionAPI = "https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple&fbclid=IwAR3SpLonGPtgnhO8mg5IL4-k25Cyr0NZA005tbdMdxAWo5yDeLeQ2u0PuM0"
+
 
 Vue.createApp({
    data(){
@@ -93,7 +95,7 @@ Vue.createApp({
       },
       async getRandomQuestion() {
          try {
-             const response = await axios.get("https://opentdb.com/api.php?amount=1&category=9&difficulty=easy&type=multiple&fbclid=IwAR3SpLonGPtgnhO8mg5IL4-k25Cyr0NZA005tbdMdxAWo5yDeLeQ2u0PuM0")
+             const response = await axios.get(RandomQuestionAPI)
              this.Question.QuestionToAnswer = await response.data.results[0].question
              console.log(this.Question.QuestionToAnswer)
          }
